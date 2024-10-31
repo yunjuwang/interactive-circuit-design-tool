@@ -17,7 +17,7 @@ function App() {
   const handleBaseShapeChange = (shape) => {
     setBaseShape(shape);
   };
-  const [baseSize, setBaseSize] = useState(30);
+  const [baseSize, setBaseSize] = useState(400);
   const handleBaseSizeChange = (event, newValue) => {
     setBaseSize(newValue);
   };
@@ -52,7 +52,7 @@ function App() {
           <div>
             <h1>Result</h1>
             {/* <div className="canvas">Display svg img here!</div> */}
-            <Canvas />
+            <Canvas baseShape={baseShape} baseSize={baseSize} />
             <div className="button">
               <Button className="button" variant="contained">
                 Export

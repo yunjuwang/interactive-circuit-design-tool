@@ -1,12 +1,12 @@
 import { IconResolver } from "./IconUtils.js";
 
-export default function Canvas({ base = "Circle", size = 400 }) {
+export default function Canvas({ baseShape = "Circle", baseSize = 400 }) {
   return (
     <div className="canvas">
       <IconResolver
-        iconName={base}
+        iconName={baseShape}
         sx={{
-          fontSize: size,
+          fontSize: baseSize,
           stroke: "#000",
           strokeWidth: "0.1px",
           fill: "#fff",

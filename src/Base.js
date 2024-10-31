@@ -23,7 +23,12 @@ export function BaseSizeSlider({ baseSize, handleBaseSizeChange }) {
       <Typography id="input-slider" gutterBottom>
         Size: {baseSize}
       </Typography>
-      <Slider value={baseSize} onChange={handleBaseSizeChange} />
+      <Slider
+        value={baseSize}
+        onChange={handleBaseSizeChange}
+        min={300}
+        max={500}
+      />
     </Box>
   );
 }
