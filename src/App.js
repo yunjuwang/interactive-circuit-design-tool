@@ -1,23 +1,74 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import Button from "@mui/material/Button";
+import Settings from "./Settings.js";
+import Header from "./Header";
+import SvgIcon from "@mui/material/SvgIcon";
+import * as MaterialIcons from "@mui/icons-material";
 
 function App() {
+  // system I/O
+  const [input, setInput] = useState("");
+  const handleInputChange = (event) => setInput(event.target.value);
+  const [output, setOutput] = useState("");
+  const handleOutputChange = (event) => setOutput(event.target.value);
+
+  // Base
+  const [baseShape, setBaseShape] = useState("");
+  const handleBaseShapeChange = (shape) => {
+    setBaseShape(shape);
+  };
+  const [baseSize, setBaseSize] = useState(30);
+  const handleBaseSizeChange = (event, newValue) => {
+    setBaseSize(newValue);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header /> 
+
+      <div className="container">
+        <div className="section" id="setting-section">
+          <div>
+            <h1>Settings</h1>
+
+            <Settings
+              input={input}
+              handleInputChange={handleInputChange}
+              output={output}
+              handleOutputChange={handleOutputChange}
+              baseShape={baseShape}
+              handleBaseShapeChange={handleBaseShapeChange}
+              baseSize={baseSize}
+              handleBaseSizeChange={handleBaseSizeChange}
+            />
+
+            <div className="button">
+              <Button variant="contained">Generate</Button>
+            </div>
+          </div>
+        </div>
+
+        <div className="section" id="result-section">
+          <div >
+            <h1>Result</h1>
+            <div className="img">Display svg img here!</div>
+            <div className="button">
+              <Button className="button" variant="contained">
+                Export
+              </Button>
+            </div>
+          </div>
+
+          <div  >
+            <h1>Insruction</h1>
+            <div>- Show insructions here!</div>
+            <div>- Show insructions here!</div>
+            <div>- Show insructions here!</div>
+            <div>- </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
