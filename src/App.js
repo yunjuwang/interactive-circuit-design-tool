@@ -3,8 +3,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import Settings from "./Settings.js";
 import Header from "./Header";
-import SvgIcon from "@mui/material/SvgIcon";
-import * as MaterialIcons from "@mui/icons-material";
+import Canvas from "./Canvas";
 
 function App() {
   // system I/O
@@ -25,7 +24,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header /> 
+      <Header />
 
       <div className="container">
         <div className="section" id="setting-section">
@@ -50,9 +49,10 @@ function App() {
         </div>
 
         <div className="section" id="result-section">
-          <div >
+          <div>
             <h1>Result</h1>
-            <div className="img">Display svg img here!</div>
+            {/* <div className="canvas">Display svg img here!</div> */}
+            <Canvas />
             <div className="button">
               <Button className="button" variant="contained">
                 Export
@@ -60,7 +60,7 @@ function App() {
             </div>
           </div>
 
-          <div  >
+          <div>
             <h1>Insruction</h1>
             <div>- Show insructions here!</div>
             <div>- Show insructions here!</div>
