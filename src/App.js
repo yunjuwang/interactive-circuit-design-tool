@@ -28,33 +28,28 @@ function App() {
   // Circuit
   var [circuitId, setCircuitId] = useState(0);
   const [circuits, setCircuits] = useState([]);
-  const handleAddCircuit = (event) => {
-    setCircuits([
-      { id: circuitId, shape: "Circle", size: 300 },
-      ...circuits, // old items
-    ]);
-    setCircuitId(circuitId + 1);
-  };
   const handleRemoveCircuit = (removeId) =>
     setCircuits(circuits.filter((circuit) => circuit.id != removeId));
 
-  // Open Dialog
+  //Select Icon Dialog
   const [openDialog, setOpenDialog] = useState(false);
-  const handleClickOpenDialog = () => {
-    setOpenDialog(true);
-  };
-  const handleCloseDialog = () => {
+  const handleClickOpenDialog = () => setOpenDialog(true);
+  const handleCloseDialog = () => setOpenDialog(false);
+  const handleSelectIcon = (selectedIcon) => {
+    handleAddCircuit(selectedIcon);
     setOpenDialog(false);
+  };
+  const handleAddCircuit = (selectedIcon) => {
+    setCircuits([
+      ...circuits, // old items
+      { id: circuitId, shape: selectedIcon, size: 300 },
+    ]);
+    setCircuitId(circuitId + 1);
   };
 
   return (
     <div className="App">
       <Header />
-      <div className="section">{/* <SearchIcons /> */}</div>
-
-      <Button onClick={handleClickOpenDialog}>OPEN</Button>
-      <SearchIconsDialog open={openDialog} handleClose={handleCloseDialog} />
-
       <div className="container">
         <div className="section" id="setting-section">
           <div>
@@ -90,10 +85,15 @@ function App() {
               <Button
                 variant="contained"
                 startIcon={<AddIcon />}
-                onClick={handleAddCircuit}
+                onClick={handleClickOpenDialog}
               >
                 Add New Pattern
               </Button>
+              <SearchIconsDialog
+                open={openDialog}
+                handleClose={handleCloseDialog}
+                handleSelect={handleSelectIcon}
+              />
 
               <div className="button">
                 <Button variant="contained">Generate</Button>
