@@ -104,7 +104,11 @@ function App() {
           <div>
             <h1>Result</h1>
             {/* <div className="canvas">Display svg img here!</div> */}
-            <Canvas baseShape={baseShape} baseSize={baseSize} />
+            <Canvas
+              baseShape={baseShape}
+              baseSize={baseSize}
+              circuits={circuits}
+            />
             <div className="button">
               <Button className="button" variant="contained">
                 Export
