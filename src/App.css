@@ -55,6 +55,10 @@ body {
   float: right;
 }
 
+.float-right {
+  float: right;
+}
+
 /* .App {
   text-align: center;
 }

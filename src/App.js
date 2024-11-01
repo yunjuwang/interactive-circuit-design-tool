@@ -9,6 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 
 import { InputSelect, OutputSelect } from "./SystemIO.js";
 import { BaseShapeButtons, BaseSizeSlider } from "./Base.js";
+import { CircuitList } from "./Circuit";
 
 function App() {
   // system I/O
@@ -24,6 +25,17 @@ function App() {
   const handleBaseSizeChange = (event, newValue) => setBaseSize(newValue);
 
   // Circuit
+  var [circuitId, setCircuitId] = useState(0);
+  const [circuits, setCircuits] = useState([]);
+  const handleAddCircuit = (event) => {
+    setCircuits([
+      { id: circuitId, shape: "Circle", size: 300 },
+      ...circuits, // old items
+    ]);
+    setCircuitId(circuitId + 1);
+  };
+  const handleRemoveCircuit = (removeId) =>
+    setCircuits(circuits.filter((circuit) => circuit.id != removeId));
 
   return (
     <div className="App">
@@ -58,11 +70,15 @@ function App() {
                 />
               </div>
               <h2>Circuit</h2>
-
-              <div className="section"></div>
-              <div className="section"></div>
-              <div className="section"></div>
-              <Button variant="contained" startIcon={<AddIcon />}>
+              <CircuitList
+                circuits={circuits}
+                handleRemoveCircuit={handleRemoveCircuit}
+              />
+              <Button
+                variant="contained"
+                startIcon={<AddIcon />}
+                onClick={handleAddCircuit}
+              >
                 Add New Pattern
               </Button>
 
@@ -70,10 +86,6 @@ function App() {
                 <Button variant="contained">Generate</Button>
               </div>
             </div>
-
-            {/* <div className="button">
-              <Button variant="contained">Generate</Button>
-            </div> */}
           </div>
         </div>
 
