@@ -23,12 +23,11 @@ export default function SearchIconsDialog({ open, handleClose, handleSelect }) {
 
   return (
     <>
-      <BootstrapDialog aria-labelledby="customized-dialog-title" open={open}>
+      <BootstrapDialog keepMounted open={open}>
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
           Select Pattern
         </DialogTitle>
         <IconButton
-          aria-label="close"
           onClick={() => {
             handleClose();
             setSelectedIcon("");
