@@ -3,9 +3,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 import Header from "./Header";
 import Canvas from "./Canvas";
-import SearchIcons from "./SearchIcons.js";
 import SearchIconsDialog from "./Dialog.js";
-
 import AddIcon from "@mui/icons-material/Add";
 
 import { InputSelect, OutputSelect } from "./SystemIO.js";

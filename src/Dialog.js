@@ -1,10 +1,12 @@
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-
+import Button from "@mui/material/Button";
 import SearchIcons from "./SearchIcons.js";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -17,6 +19,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 export default function SearchIconsDialog({ open, handleClose, handleSelect }) {
+  const [selectedIcon, setSelectedIcon] = useState("");
+
   return (
     <>
       <BootstrapDialog aria-labelledby="customized-dialog-title" open={open}>
@@ -25,7 +29,10 @@ export default function SearchIconsDialog({ open, handleClose, handleSelect }) {
         </DialogTitle>
         <IconButton
           aria-label="close"
-          onClick={handleClose}
+          onClick={() => {
+            handleClose();
+            setSelectedIcon("");
+          }}
           sx={(theme) => ({
             position: "absolute",
             right: 8,
@@ -36,8 +43,23 @@ export default function SearchIconsDialog({ open, handleClose, handleSelect }) {
           <CloseIcon />
         </IconButton>
         <DialogContent dividers>
-          <SearchIcons handleSelect={handleSelect} />
+          <SearchIcons
+            selectedIcon={selectedIcon}
+            setSelectedIcon={setSelectedIcon}
+          />
         </DialogContent>
+        <DialogActions>
+          <Button
+            disabled={!selectedIcon}
+            variant="contained"
+            onClick={() => {
+              handleSelect(selectedIcon);
+              setSelectedIcon("");
+            }}
+          >
+            Select
+          </Button>
+        </DialogActions>
       </BootstrapDialog>
     </>
   );

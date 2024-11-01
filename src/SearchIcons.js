@@ -5,7 +5,6 @@ import InputBase from "@mui/material/InputBase";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
@@ -163,12 +162,12 @@ Icons.propTypes = {
 
 const Form = styled("form")({
   position: "sticky",
-  top: 80,
+  top: 0,
 });
 
 const Paper = styled(MuiPaper)(({ theme }) => ({
   position: "sticky",
-  top: 80,
+  top: 0,
   display: "flex",
   alignItems: "center",
   marginBottom: theme.spacing(2),
@@ -193,6 +192,7 @@ const searchIndex = new FlexSearchIndex({
 
 const allIconsMap = {};
 const allIcons = Object.keys(mui)
+  .filter((importName) => !importName.endsWith("TwoTone")) // remove "Two Tone" icon
   .sort()
   .map((importName) => {
     let theme = "Filled";
@@ -234,9 +234,8 @@ function useLatest(value) {
   return value ?? latest.current;
 }
 
-export default function SearchIcons({ handleSelect }) {
+export default function SearchIcons({ setSelectedIcon }) {
   const [theme, setTheme] = React.useState("Filled");
-  const [selectedIcon, setSelectedIcon] = React.useState("");
   const [query, setQuery] = React.useState("");
 
   const handleIconClick = React.useCallback(
@@ -245,10 +244,6 @@ export default function SearchIcons({ handleSelect }) {
     },
     [setSelectedIcon]
   );
-
-  const handleClose = React.useCallback(() => {
-    setSelectedIcon("");
-  }, [setSelectedIcon]);
 
   const icons = React.useMemo(() => {
     const keys =
@@ -273,18 +268,17 @@ export default function SearchIcons({ handleSelect }) {
             value={theme}
             onChange={(event) => setTheme(event.target.value)}
           >
-            {["Filled", "Outlined", "Rounded", "Two tone", "Sharp"].map(
-              (currentTheme) => {
-                return (
-                  <FormControlLabel
-                    key={currentTheme}
-                    value={currentTheme}
-                    control={<Radio size="small" />}
-                    label={currentTheme}
-                  />
-                );
-              }
-            )}
+            {/* {["Filled", "Outlined", "Rounded", "Two tone", "Sharp"].map( */}
+            {["Filled", "Outlined", "Rounded", "Sharp"].map((currentTheme) => {
+              return (
+                <FormControlLabel
+                  key={currentTheme}
+                  value={currentTheme}
+                  control={<Radio size="small" />}
+                  label={currentTheme}
+                />
+              );
+            })}
           </RadioGroup>
         </Form>
       </Grid>
@@ -312,9 +306,6 @@ export default function SearchIcons({ handleSelect }) {
           icons.length
         )} matching results`}</Typography>
         <Icons icons={deferredIcons} handleIconClick={handleIconClick} />
-        <Button variant="contained" onClick={() => handleSelect(selectedIcon)}>
-          Select
-        </Button>
       </Grid>
     </Grid>
   );
