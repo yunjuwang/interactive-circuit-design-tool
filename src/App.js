@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Settings from "./Settings.js";
 import Header from "./Header";
 import Canvas from "./Canvas";
+import SearchIcons from "./SearchIcons.js";
 
 function App() {
   // system I/O
@@ -25,6 +26,9 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <div className="section">
+        <SearchIcons />
+      </div>
 
       <div className="container">
         <div className="section" id="setting-section">

@@ -38,6 +38,7 @@ export function BaseShapeButtons({ baseShape, handleBaseShapeChange }) {
     <Stack direction="row" spacing={1}>
       {BASE_ICON_LIST.map((iconName) => (
         <IconButton
+          key={iconName}
           onClick={() => handleBaseShapeChange(iconName)}
           color={baseShape == iconName ? "primary" : "default"}
         >
