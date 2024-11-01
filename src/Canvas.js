@@ -17,7 +17,7 @@ const DrawBase = ({ shape = "Circle", size = 400 }) => {
 export default function Canvas({ baseShape = "Circle", baseSize = 400 }) {
   return (
     <div className="canvas">
-      <DrawBase shape={baseShape} size={baseSize} />
+      {baseShape ? <DrawBase shape={baseShape} size={baseSize} /> : null}
     </div>
   );
 }

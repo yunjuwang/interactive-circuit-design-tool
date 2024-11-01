@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 
 import { IconResolver } from "./IconUtils.js";
 
-const BASE_ICON_LIST = [
+const BASE_SHAPE_LIST = [
   "Circle",
   "Square",
   "Pentagon",
@@ -36,13 +36,13 @@ export function BaseSizeSlider({ baseSize, handleBaseSizeChange }) {
 export function BaseShapeButtons({ baseShape, handleBaseShapeChange }) {
   return (
     <Stack direction="row" spacing={1}>
-      {BASE_ICON_LIST.map((iconName) => (
+      {BASE_SHAPE_LIST.map((shape) => (
         <IconButton
-          key={iconName}
-          onClick={() => handleBaseShapeChange(iconName)}
-          color={baseShape == iconName ? "primary" : "default"}
+          key={shape}
+          onClick={() => handleBaseShapeChange(shape)}
+          color={baseShape == shape ? "primary" : "default"}
         >
-          <IconResolver iconName={iconName} />
+          <IconResolver iconName={shape} />
         </IconButton>
       ))}
     </Stack>
