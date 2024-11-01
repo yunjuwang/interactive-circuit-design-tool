@@ -1,10 +1,14 @@
 import "./App.css";
 import { useState } from "react";
 import Button from "@mui/material/Button";
-import Settings from "./Settings.js";
 import Header from "./Header";
 import Canvas from "./Canvas";
 import SearchIcons from "./SearchIcons.js";
+
+import AddIcon from "@mui/icons-material/Add";
+
+import { InputSelect, OutputSelect } from "./SystemIO.js";
+import { BaseShapeButtons, BaseSizeSlider } from "./Base.js";
 
 function App() {
   // system I/O
@@ -15,40 +19,61 @@ function App() {
 
   // Base
   const [baseShape, setBaseShape] = useState("");
-  const handleBaseShapeChange = (shape) => {
-    setBaseShape(shape);
-  };
+  const handleBaseShapeChange = (shape) => setBaseShape(shape);
   const [baseSize, setBaseSize] = useState(400);
-  const handleBaseSizeChange = (event, newValue) => {
-    setBaseSize(newValue);
-  };
+  const handleBaseSizeChange = (event, newValue) => setBaseSize(newValue);
+
+  // Circuit
 
   return (
     <div className="App">
       <Header />
-      <div className="section">
-        <SearchIcons />
-      </div>
+      <div className="section">{/* <SearchIcons /> */}</div>
 
       <div className="container">
         <div className="section" id="setting-section">
           <div>
             <h1>Settings</h1>
 
-            <Settings
-              input={input}
-              handleInputChange={handleInputChange}
-              output={output}
-              handleOutputChange={handleOutputChange}
-              baseShape={baseShape}
-              handleBaseShapeChange={handleBaseShapeChange}
-              baseSize={baseSize}
-              handleBaseSizeChange={handleBaseSizeChange}
-            />
+            <div id="settings">
+              <h2>System I/O</h2>
+              <InputSelect
+                input={input}
+                handleInputChange={handleInputChange}
+              />
+              <OutputSelect
+                output={output}
+                handleOutputChange={handleOutputChange}
+              />
 
-            <div className="button">
-              <Button variant="contained">Generate</Button>
+              <h2>Base</h2>
+              <div className="section">
+                <BaseShapeButtons
+                  baseShape={baseShape}
+                  handleBaseShapeChange={handleBaseShapeChange}
+                />
+                <BaseSizeSlider
+                  baseSize={baseSize}
+                  handleBaseSizeChange={handleBaseSizeChange}
+                />
+              </div>
+              <h2>Circuit</h2>
+
+              <div className="section"></div>
+              <div className="section"></div>
+              <div className="section"></div>
+              <Button variant="contained" startIcon={<AddIcon />}>
+                Add New Pattern
+              </Button>
+
+              <div className="button">
+                <Button variant="contained">Generate</Button>
+              </div>
             </div>
+
+            {/* <div className="button">
+              <Button variant="contained">Generate</Button>
+            </div> */}
           </div>
         </div>
 
