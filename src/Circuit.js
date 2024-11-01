@@ -3,7 +3,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { IconResolver } from "./IconUtils.js";
 
 export function CircuitList({ circuits, handleRemoveCircuit }) {
-  console.log(circuits);
   return (
     <>
       {circuits.map((circuit) => (

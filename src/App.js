@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Header from "./Header";
 import Canvas from "./Canvas";
 import SearchIcons from "./SearchIcons.js";
+import SearchIconsDialog from "./Dialog.js";
 
 import AddIcon from "@mui/icons-material/Add";
 
@@ -37,10 +38,22 @@ function App() {
   const handleRemoveCircuit = (removeId) =>
     setCircuits(circuits.filter((circuit) => circuit.id != removeId));
 
+  // Open Dialog
+  const [openDialog, setOpenDialog] = useState(false);
+  const handleClickOpenDialog = () => {
+    setOpenDialog(true);
+  };
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+
   return (
     <div className="App">
       <Header />
       <div className="section">{/* <SearchIcons /> */}</div>
+
+      <Button onClick={handleClickOpenDialog}>OPEN</Button>
+      <SearchIconsDialog open={openDialog} handleClose={handleCloseDialog} />
 
       <div className="container">
         <div className="section" id="setting-section">
