@@ -40,7 +40,7 @@ body {
   margin: 10px 0px;
 }
 
-.canvas {
+#canvas {
   padding: 10px 30px;
   background: #fff;
   border: 1px solid #ccc;

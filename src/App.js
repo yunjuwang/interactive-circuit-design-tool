@@ -8,7 +8,8 @@ import AddIcon from "@mui/icons-material/Add";
 
 import { InputSelect, OutputSelect } from "./SystemIO.js";
 import { BaseShapeButtons, BaseSizeSlider } from "./Base.js";
-import { CircuitList } from "./Circuit";
+import { CircuitList } from "./Circuit.js";
+import { ExportButton } from "./Export.js";
 
 function App() {
   // system I/O
@@ -110,9 +111,7 @@ function App() {
               circuits={circuits}
             />
             <div className="button">
-              <Button className="button" variant="contained">
-                Export
-              </Button>
+              <ExportButton />
             </div>
           </div>
 

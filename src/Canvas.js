@@ -36,7 +36,7 @@ export default function Canvas({
   circuits,
 }) {
   return (
-    <div className="canvas">
+    <div id="canvas">
       {baseShape ? <DrawBase shape={baseShape} size={baseSize} /> : null}
 
       {circuits.map((circuit) => (
