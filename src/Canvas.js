@@ -22,9 +22,9 @@ const DrawCircuit = ({ shape = "Circle", size = 400 }) => {
       sx={{
         position: "absolute",
         fontSize: size,
-        // stroke: "#ff0000",
-        // strokeWidth: "0.1px",
-        fill: "#000",
+        stroke: "#000",
+        strokeWidth: "0.1px",
+        fill: "rgba(0,0,0,0.2)",
       }}
     />
   );
