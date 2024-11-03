@@ -3,18 +3,35 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconResolver } from "./IconUtils.js";
 import { InputSlider } from "./Slider.js";
+import Stack from "@mui/material/Stack";
 
-function CircuitEditor({ circuit, handleEdit, handleDelete }) {
+function CircuitEditor({
+  editingId,
+  editingCircuit,
+  handleEdit,
+  handleDelete,
+}) {
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [scaleX, setScaleX] = useState(0.5);
   const [scaleY, setScaleY] = useState(0.5);
   const [rotate, setRotate] = useState(0);
+  useEffect(() => {
+    if (editingId === "" || editingCircuit === undefined) return;
+
+    setX(editingCircuit.x);
+    setY(editingCircuit.y);
+    setScaleX(editingCircuit.scaleX);
+    setScaleY(editingCircuit.scaleY);
+    setRotate(editingCircuit.rotate);
+  }, [editingId]);
 
   useEffect(() => {
+    if (editingId === "" || editingCircuit === undefined) return;
+
     const newCircuit = {
-      id: circuit.id,
-      shape: circuit.shape,
+      id: editingId,
+      shape: editingCircuit.shape,
       size: 300,
       x: x,
       y: y,
@@ -23,10 +40,13 @@ function CircuitEditor({ circuit, handleEdit, handleDelete }) {
       rotate: rotate,
     };
     handleEdit(newCircuit);
-  }, [x, y, scaleX, scaleY, rotate, circuit]);
+  }, [x, y, scaleX, scaleY, rotate]);
 
   return (
     <div>
+      <IconButton className="float-right" onClick={handleDelete}>
+        <DeleteIcon />
+      </IconButton>
       <h6>Position</h6>
       <InputSlider InputName="X" value={x} setValue={setX} />
       <InputSlider InputName="Y" value={y} setValue={setY} />
@@ -64,26 +84,31 @@ export function CircuitList({
   handleEditCircuit,
   handleRemoveCircuit,
 }) {
+  const [editingId, setEditingId] = useState(0);
+  const editingCircuit = circuits.find((circuit) => circuit.id == editingId);
   return (
     <>
-      {circuits.map((circuit) => (
-        <div key={circuit.id} className="section">
-          #{circuit.id} {circuit.shape}
-          <IconResolver iconName={circuit.shape} />
+      <Stack direction="row" spacing={1}>
+        {circuits.map((circuit) => (
           <IconButton
-            className="float-right"
-            onClick={() => handleRemoveCircuit(circuit.id)}
+            key={circuit.id}
+            onClick={() => setEditingId(circuit.id)}
+            color={editingId == circuit.id ? "primary" : "default"}
           >
-            <DeleteIcon />
+            <IconResolver iconName={circuit.shape} />
           </IconButton>
-          <CircuitEditor
-            circuit={circuit}
-            handleEdit={(newCircuit) =>
-              handleEditCircuit(circuit.id, newCircuit)
-            }
-          />
-        </div>
-      ))}
+        ))}
+      </Stack>
+      {editingId === "" || editingCircuit === undefined ? null : (
+        <CircuitEditor
+          editingId={editingCircuit.id}
+          editingCircuit={editingCircuit}
+          handleEdit={(newCircuit) =>
+            handleEditCircuit(editingCircuit.id, newCircuit)
+          }
+          handleDelete={() => handleRemoveCircuit(editingCircuit.id)}
+        />
+      )}
     </>
   );
 }
