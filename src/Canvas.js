@@ -1,9 +1,18 @@
 import { IconResolver } from "./IconUtils.js";
 
-const DrawBase = ({ shape = "Circle", size = 400 }) => {
+const DrawBase = ({
+  shape = "Circle",
+  size = 400,
+  x = 0,
+  y = 0,
+  scaleX = 1,
+  scaleY = 1,
+  rotate = 0,
+}) => {
   return (
     <IconResolver
       iconName={shape}
+      transform={`translate(${x} ${y}) scale(${scaleX} ${scaleY}) rotate(${rotate})`}
       sx={{
         position: "absolute",
         fontSize: size,
@@ -15,10 +24,19 @@ const DrawBase = ({ shape = "Circle", size = 400 }) => {
   );
 };
 
-const DrawCircuit = ({ shape = "Circle", size = 400 }) => {
+const DrawCircuit = ({
+  shape = "Circle",
+  size = 400,
+  x = 0,
+  y = 0,
+  scaleX = 0.5,
+  scaleY = 0.5,
+  rotate = 0,
+}) => {
   return (
     <IconResolver
       iconName={shape}
+      transform={`translate(${x} ${y}) scale(${scaleX} ${scaleY}) rotate(${rotate})`}
       sx={{
         position: "absolute",
         fontSize: size,
@@ -40,7 +58,15 @@ export default function Canvas({
       {baseShape ? <DrawBase shape={baseShape} size={baseSize} /> : null}
 
       {circuits.map((circuit) => (
-        <DrawCircuit shape={circuit.shape} size={400} />
+        <DrawCircuit
+          shape={circuit.shape}
+          size={400}
+          x={circuit.x}
+          y={circuit.y}
+          scaleX={circuit.scaleX}
+          scaleY={circuit.scaleY}
+          rotate={circuit.rotate}
+        />
       ))}
     </div>
   );

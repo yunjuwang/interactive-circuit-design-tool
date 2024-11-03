@@ -25,8 +25,29 @@ function App() {
   const handleBaseSizeChange = (event, newValue) => setBaseSize(newValue);
 
   // Circuit
-  var [circuitId, setCircuitId] = useState(0);
+  const [currCircuitId, setCurrCircuitId] = useState(0);
   const [circuits, setCircuits] = useState([]);
+  const handleAddCircuit = (selectedIcon) => {
+    setCircuits([
+      ...circuits, // old items
+      {
+        id: currCircuitId,
+        shape: selectedIcon,
+        size: 300,
+        x: 0,
+        y: 0,
+        scaleX: 0.5,
+        scaleY: 0.5,
+        rotate: 0,
+      },
+    ]);
+    setCurrCircuitId(currCircuitId + 1);
+  };
+  const handleEditCircuit = (editId, newCircuit) => {
+    setCircuits(
+      circuits.map((circuit) => (circuit.id == editId ? newCircuit : circuit))
+    );
+  };
   const handleRemoveCircuit = (removeId) =>
     setCircuits(circuits.filter((circuit) => circuit.id != removeId));
 
@@ -38,13 +59,6 @@ function App() {
     handleAddCircuit(selectedIcon);
     setOpenDialog(false);
   };
-  const handleAddCircuit = (selectedIcon) => {
-    setCircuits([
-      ...circuits, // old items
-      { id: circuitId, shape: selectedIcon, size: 300 },
-    ]);
-    setCircuitId(circuitId + 1);
-  };
 
   return (
     <div className="App">
@@ -55,16 +69,6 @@ function App() {
             <h1>Settings</h1>
 
             <div id="settings">
-              <h2>System I/O</h2>
-              <InputSelect
-                input={input}
-                handleInputChange={handleInputChange}
-              />
-              <OutputSelect
-                output={output}
-                handleOutputChange={handleOutputChange}
-              />
-
               <h2>Base</h2>
               <div className="section">
                 <BaseShapeButtons
@@ -79,6 +83,7 @@ function App() {
               <h2>Circuit</h2>
               <CircuitList
                 circuits={circuits}
+                handleEditCircuit={handleEditCircuit}
                 handleRemoveCircuit={handleRemoveCircuit}
               />
               <Button
@@ -94,9 +99,15 @@ function App() {
                 handleSelect={handleSelectIcon}
               />
 
-              <div className="button">
-                <Button variant="contained">Generate</Button>
-              </div>
+              <h2>System I/O</h2>
+              <InputSelect
+                input={input}
+                handleInputChange={handleInputChange}
+              />
+              <OutputSelect
+                output={output}
+                handleOutputChange={handleOutputChange}
+              />
             </div>
           </div>
         </div>
