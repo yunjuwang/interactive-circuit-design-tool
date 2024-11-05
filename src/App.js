@@ -18,8 +18,6 @@ function App() {
   // Base
   const [baseShape, setBaseShape] = useState("");
   const handleBaseShapeChange = (shape) => setBaseShape(shape);
-  const [baseSize, setBaseSize] = useState(400);
-  const handleBaseSizeChange = (event, newValue) => setBaseSize(newValue);
 
   // Circuit
   const [currCircuitId, setCurrCircuitId] = useState(0);
@@ -72,10 +70,6 @@ function App() {
                   baseShape={baseShape}
                   handleBaseShapeChange={handleBaseShapeChange}
                 />
-                <BaseSizeSlider
-                  baseSize={baseSize}
-                  handleBaseSizeChange={handleBaseSizeChange}
-                />
               </div>
               <h2>Circuit</h2>
               <CircuitList
@@ -105,12 +99,7 @@ function App() {
         <div className="section" id="result-section">
           <div>
             <h1>Result</h1>
-            {/* <div className="canvas">Display svg img here!</div> */}
-            <Canvas
-              baseShape={baseShape}
-              baseSize={baseSize}
-              circuits={circuits}
-            />
+            <Canvas baseShape={baseShape} circuits={circuits} />
             <div className="button">
               <ExportButton />
             </div>
