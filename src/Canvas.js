@@ -53,6 +53,7 @@ export default function Canvas({ baseShape = "Circle", circuits }) {
 
       {circuits.map((circuit) => (
         <DrawCircuit
+          key={circuit.id}
           shape={circuit.shape}
           x={circuit.x}
           y={circuit.y}

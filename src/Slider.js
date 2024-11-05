@@ -1,8 +1,6 @@
-import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
 import Slider from "@mui/material/Slider";
 import MuiInput from "@mui/material/Input";
 
@@ -18,11 +16,6 @@ export function InputSlider({
   maxValue = 200,
   step = 1,
 }) {
-  console.log(
-    `InputName:${InputName} minValue:${minValue} maxValue:${maxValue} step:${step}`
-  );
-  // const [value, setValue] = React.useState(30);
-
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -41,9 +34,6 @@ export function InputSlider({
 
   return (
     <Box sx={{ minWidth: 200 }}>
-      {/* <Typography id="input-slider" gutterBottom>
-        {InputName}
-      </Typography> */}
       <Grid container spacing={2} sx={{ alignItems: "center" }}>
         <Grid item>{InputName}</Grid>
         <Grid item xs>
