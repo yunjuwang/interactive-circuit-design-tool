@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { IconResolver } from "./IconUtils.js";
 import { InputSlider } from "./Slider.js";
 import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
 
 function CircuitEditor({
   editingId,
@@ -43,44 +45,62 @@ function CircuitEditor({
   }, [x, y, scaleX, scaleY, rotate]);
 
   return (
-    <div>
-      <IconButton className="float-right" onClick={handleDelete}>
-        <DeleteIcon />
-      </IconButton>
-      <h6>Position</h6>
-      <InputSlider InputName="X" value={x} setValue={setX} />
-      <InputSlider InputName="Y" value={y} setValue={setY} />
-      <h6>Scale</h6>
-      <InputSlider
-        InputName="X"
-        value={scaleX}
-        setValue={setScaleX}
-        minValue={0}
-        maxValue={1}
-        step={0.01}
-      />
-      <InputSlider
-        InputName="Y"
-        value={scaleY}
-        setValue={setScaleY}
-        minValue={0}
-        maxValue={1}
-        step={0.01}
-      />
-      <h6>Rotate</h6>
-      <InputSlider
-        InputName=""
-        value={rotate}
-        setValue={setRotate}
-        minValue={0}
-        maxValue={360}
-      />
+    <div className="section">
+      <div className="circuit-edior-delete-btn">
+        <IconButton onClick={handleDelete}>
+          <DeleteIcon />
+        </IconButton>
+      </div>
+      <h4 className="circuit-edior-title">Position</h4>
+      <div className="slider-section">
+        <div className="slider slider-x">
+          <InputSlider InputName="X" value={x} setValue={setX} />
+        </div>
+        <div className="slider">
+          <InputSlider InputName="Y" value={y} setValue={setY} />
+        </div>
+      </div>
+      <h4 className="circuit-edior-title">Scale</h4>
+      <div className="slider-section">
+        <div className="slider slider-x">
+          <InputSlider
+            InputName="X"
+            value={scaleX}
+            setValue={setScaleX}
+            minValue={0}
+            maxValue={1}
+            step={0.01}
+          />
+        </div>
+        <div className="slider">
+          <InputSlider
+            className="slider"
+            InputName="Y"
+            value={scaleY}
+            setValue={setScaleY}
+            minValue={0}
+            maxValue={1}
+            step={0.01}
+          />
+        </div>
+      </div>
+      <h4 className="circuit-edior-title">Rotate</h4>
+      <div className="slider">
+        <InputSlider
+          InputName=""
+          value={rotate}
+          setValue={setRotate}
+          minValue={0}
+          maxValue={360}
+        />
+      </div>
     </div>
   );
 }
 
 export function CircuitList({
   circuits,
+  handleClickAddCircuit,
   handleEditCircuit,
   handleRemoveCircuit,
 }) {
@@ -88,17 +108,27 @@ export function CircuitList({
   const editingCircuit = circuits.find((circuit) => circuit.id == editingId);
   return (
     <>
-      <Stack direction="row" spacing={1}>
-        {circuits.map((circuit) => (
-          <IconButton
-            key={circuit.id}
-            onClick={() => setEditingId(circuit.id)}
-            color={editingId == circuit.id ? "primary" : "default"}
-          >
-            <IconResolver iconName={circuit.shape} />
-          </IconButton>
-        ))}
-      </Stack>
+      <div id="circuit-list">
+        <Stack direction="row" spacing={1}>
+          {circuits.map((circuit) => (
+            <IconButton
+              key={circuit.id}
+              onClick={() => setEditingId(circuit.id)}
+              color={editingId == circuit.id ? "primary" : "default"}
+            >
+              <IconResolver iconName={circuit.shape} />
+            </IconButton>
+          ))}
+        </Stack>
+        <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={handleClickAddCircuit}
+        >
+          Add New Pattern
+        </Button>
+      </div>
+
       {editingId === "" || editingCircuit === undefined ? null : (
         <CircuitEditor
           editingId={editingCircuit.id}

@@ -2,7 +2,7 @@ import { IconResolver } from "./IconUtils.js";
 
 const DrawBase = ({
   shape = "Circle",
-  size = 400,
+  size = 500,
   x = 0,
   y = 0,
   scaleX = 1,
@@ -26,7 +26,7 @@ const DrawBase = ({
 
 const DrawCircuit = ({
   shape = "Circle",
-  size = 400,
+  size = 500,
   x = 0,
   y = 0,
   scaleX = 0.5,
@@ -50,7 +50,7 @@ const DrawCircuit = ({
 
 export default function Canvas({
   baseShape = "Circle",
-  baseSize = 400,
+  baseSize = 500,
   circuits,
 }) {
   return (

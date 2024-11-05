@@ -1,11 +1,8 @@
 import "./App.css";
 import { useState } from "react";
-import Button from "@mui/material/Button";
 import Header from "./Header";
 import Canvas from "./Canvas";
 import SearchIconsDialog from "./Dialog.js";
-import AddIcon from "@mui/icons-material/Add";
-
 import { InputSelect, OutputSelect } from "./SystemIO.js";
 import { BaseShapeButtons, BaseSizeSlider } from "./Base.js";
 import { CircuitList } from "./Circuit.js";
@@ -55,7 +52,7 @@ function App() {
   const [openDialog, setOpenDialog] = useState(false);
   const handleClickOpenDialog = () => setOpenDialog(true);
   const handleCloseDialog = () => setOpenDialog(false);
-  const handleSelectIcon = (selectedIcon) => {
+  const handleClickSelect = (selectedIcon) => {
     handleAddCircuit(selectedIcon);
     setOpenDialog(false);
   };
@@ -83,22 +80,15 @@ function App() {
               <h2>Circuit</h2>
               <CircuitList
                 circuits={circuits}
+                handleClickAddCircuit={handleClickOpenDialog}
                 handleEditCircuit={handleEditCircuit}
                 handleRemoveCircuit={handleRemoveCircuit}
               />
-              <Button
-                variant="contained"
-                startIcon={<AddIcon />}
-                onClick={handleClickOpenDialog}
-              >
-                Add New Pattern
-              </Button>
               <SearchIconsDialog
                 open={openDialog}
                 handleClose={handleCloseDialog}
-                handleSelect={handleSelectIcon}
+                handleSelect={handleClickSelect}
               />
-
               <h2>System I/O</h2>
               <InputSelect
                 input={input}

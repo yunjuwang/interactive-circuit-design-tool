@@ -12,13 +12,14 @@ body {
 }
 .container {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   /* align-items: center; */
   justify-content: center;
   padding: 10px 30px;
 }
 
 .section {
+  position: relative;
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -29,6 +30,7 @@ body {
 #setting-section {
   /* flex: 3; */
   flex: 1 0 300px;
+  min-width: 500px;
 }
 
 #result-section {
@@ -41,13 +43,26 @@ body {
 }
 
 #canvas {
-  padding: 10px 30px;
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 10px;
-  width: 400px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
   margin: 0 auto;
+}
+
+#circuit-list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.circuit-edior-title {
+  margin: 10px 0px 8px 0px;
+}
+.circuit-edior-delete-btn {
+  position: absolute;
+  right: 16px;
+  top: 8px;
 }
 
 .button {
@@ -57,6 +72,17 @@ body {
 
 .float-right {
   float: right;
+}
+
+.slider-section {
+  display: flex;
+}
+.slider {
+  flex: 1 1 300px;
+  max-width: 300px;
+}
+.slider-x {
+  margin-right: 10px;
 }
 
 /* .App {
