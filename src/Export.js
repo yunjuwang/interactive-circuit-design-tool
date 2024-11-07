@@ -93,17 +93,17 @@ function GenerateSvgFromCanvas(canvas) {
 
         // const centerX = 12;
         // const centerY = 12;
-        // const centerX_scaled = centerX * scaleX;
-        // const centerY_scaled = centerY * scaleY;
-        // // scale
-        // x = x + centerX * (1 - scaleX);
-        // y = y + centerY * (1 - scaleY);
+        const centerX_scaled = centerX * scaleX;
+        const centerY_scaled = centerY * scaleY;
+        // scale
+        x = x + centerX * (1 - scaleX);
+        y = y + centerY * (1 - scaleY);
         // // // rotate
         // x =
         //   x - centerX_scaled * (1 - Math.sin(rotateRad) - Math.cos(rotateRad));
         // y =
         //   y - centerY_scaled * (1 - Math.cos(rotateRad) + Math.sin(rotateRad));
-        // // rotate
+        // rotate
         x = x - 12 * (1 - Math.sin(rotateRad) - Math.cos(rotateRad));
         y = y - 12 * (1 - Math.cos(rotateRad) + Math.sin(rotateRad));
 
