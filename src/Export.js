@@ -98,14 +98,43 @@ function GenerateSvgFromCanvas(canvas) {
         // scale
         x = x + centerX * (1 - scaleX);
         y = y + centerY * (1 - scaleY);
+
+        let newXr = centerX * (1 - scaleX);
+        let newYr = centerY * (1 - scaleY);
+
+        let X1 =
+          12 + (x - 12) * Math.cos(rotateRad) - (y - 12) * Math.sin(rotateRad);
+        let X2 =
+          newXr +
+          (x - newXr) * Math.cos(rotateRad) -
+          (y - newYr) * Math.sin(rotateRad);
+        let deltaX = X1 - X2;
+        console.log("X1: " + X1 + " X2: " + X2 + " deltaX: " + deltaX);
+
+        let Y1 =
+          12 + (x - 12) * Math.sin(rotateRad) + (y - 12) * Math.cos(rotateRad);
+        let Y2 =
+          newYr +
+          (x - newXr) * Math.sin(rotateRad) +
+          (y - newYr) * Math.cos(rotateRad);
+        let deltaY = Y1 - Y2;
+        x = x + deltaX;
+        y = y + deltaY;
+        // x =
+        //   x +
+        //   12 *
+        //     (scaleX -
+        //       scaleX * Math.cos(rotateRad) +
+        //       (2 - scaleY) * Math.sin(rotateRad));
+
         // // // rotate
         // x =
         //   x - centerX_scaled * (1 - Math.sin(rotateRad) - Math.cos(rotateRad));
         // y =
         //   y - centerY_scaled * (1 - Math.cos(rotateRad) + Math.sin(rotateRad));
-        // rotate
-        x = x - 12 * (1 - Math.sin(rotateRad) - Math.cos(rotateRad));
-        y = y - 12 * (1 - Math.cos(rotateRad) + Math.sin(rotateRad));
+        // // rotate
+        // x = x - 12 * (1 - Math.sin(rotateRad) - Math.cos(rotateRad));
+        // y = y - 12 * (1 - Math.cos(rotateRad) + Math.sin(rotateRad));
 
         // const centerX_rotated =
         //   centerX * Math.cos(rotateRad) - centerY * Math.sin(rotateRad);

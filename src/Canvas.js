@@ -34,7 +34,7 @@ const DrawCircuit = ({
   return (
     <IconResolver
       iconName={shape}
-      transform={`rotate(${rotate}) translate(${x} ${y}) scale(${scaleX} ${scaleY}) `}
+      transform={`translate(${x} ${y}) rotate(${rotate}) scale(${scaleX} ${scaleY}) `}
       sx={{
         position: "absolute",
         fontSize: 500,
