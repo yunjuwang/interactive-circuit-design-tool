@@ -10,11 +10,26 @@ import { IconResolver } from "./IconUtils.js";
 const BASE_SHAPE_LIST = [
   "Circle",
   "Square",
+  "Rectangle",
   "Pentagon",
   "Hexagon",
   "Star",
   "Favorite",
   "Extension",
+  "Navigation",
+  "Brightness2",
+  "DarkMode",
+  "ModeComment",
+  "ChatBubble",
+  "Bookmark",
+  "Cloud",
+  "DesktopMac",
+  "Work",
+  "Folder",
+  "Label",
+  "LocalOffer",
+  "Science",
+  "Shield",
 ];
 
 export function BaseSizeSlider({ baseSize, handleBaseSizeChange }) {
@@ -35,7 +50,7 @@ export function BaseSizeSlider({ baseSize, handleBaseSizeChange }) {
 
 export function BaseShapeButtons({ baseShape, handleBaseShapeChange }) {
   return (
-    <Stack direction="row" spacing={1}>
+    <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: "wrap" }}>
       {BASE_SHAPE_LIST.map((shape) => (
         <IconButton
           key={shape}

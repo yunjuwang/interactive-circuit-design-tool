@@ -67,7 +67,7 @@ function CircuitEditor({
             InputName="X"
             value={scaleX}
             setValue={setScaleX}
-            minValue={0}
+            minValue={-1}
             maxValue={1}
             step={0.01}
           />
@@ -78,7 +78,7 @@ function CircuitEditor({
             InputName="Y"
             value={scaleY}
             setValue={setScaleY}
-            minValue={0}
+            minValue={-1}
             maxValue={1}
             step={0.01}
           />
@@ -90,7 +90,7 @@ function CircuitEditor({
           InputName=""
           value={rotate}
           setValue={setRotate}
-          minValue={0}
+          minValue={-360}
           maxValue={360}
         />
       </div>
@@ -109,7 +109,7 @@ export function CircuitList({
   return (
     <>
       <div id="circuit-list">
-        <Stack direction="row" spacing={1}>
+        <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: "wrap" }}>
           {circuits.map((circuit) => (
             <IconButton
               key={circuit.id}
