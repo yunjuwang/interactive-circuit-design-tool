@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/interactive-circuits-toolkit/static/css/main.00a5bf21.css",
+    "main.js": "/interactive-circuits-toolkit/static/js/main.85e4f980.js",
+    "index.html": "/interactive-circuits-toolkit/index.html",
+    "main.00a5bf21.css.map": "/interactive-circuits-toolkit/static/css/main.00a5bf21.css.map",
+    "main.85e4f980.js.map": "/interactive-circuits-toolkit/static/js/main.85e4f980.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.00a5bf21.css",
+    "static/js/main.85e4f980.js"
+  ]
+}

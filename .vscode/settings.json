@@ -1,0 +1,17 @@
+{
+    // For Prettier
+  
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true, // not mandatory
+  
+    // For Other Settings
+  
+    "editor.rulers": [100],
+    "editor.tabSize": 2, // optional
+    "editor.renderWhitespace": "boundary", // recommended
+    "javascript.updateImportsOnFileMove.enabled": "always", // recommended
+    "[json]": {
+      "editor.tabSize": 2
+    }
+  }
+  
