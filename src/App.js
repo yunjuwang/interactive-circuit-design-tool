@@ -7,6 +7,7 @@ import { InputSelect, OutputSelect } from "./SystemIO.js";
 import { BaseShapeButtons, BaseSizeSlider } from "./Base.js";
 import { CircuitList } from "./Circuit.js";
 import { ExportButton } from "./Export.js";
+import { Insruction } from "./Insruction.js";
 
 function App() {
   // system I/O
@@ -107,10 +108,9 @@ function App() {
 
           <div>
             <h1>Insruction</h1>
-            <div>- Show insructions here!</div>
-            <div>- Show insructions here!</div>
-            <div>- Show insructions here!</div>
-            <div>- </div>
+            <div>
+              <Insruction output={output} />
+            </div>
           </div>
         </div>
       </div>
