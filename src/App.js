@@ -64,7 +64,7 @@ function App() {
         <Step step={1} title="Design Your System" desc="">
           <div className="container">
             <div className="section" id="setting-section">
-              <h2>System I/O</h2>
+              <h3>Decide Your System I/O...</h3>
               <InputSelect
                 input={input}
                 handleInputChange={handleInputChange}
@@ -83,36 +83,31 @@ function App() {
         >
           <div className="container">
             <div className="section" id="circuit-edit-section">
-              <div id="settings">
-                <h2>Base</h2>
-                <div className="section">
-                  <BaseShapeButtons
-                    baseShape={baseShape}
-                    handleBaseShapeChange={handleBaseShapeChange}
-                  />
-                </div>
-                <h2>Circuit</h2>
-                <CircuitList
-                  circuits={circuits}
-                  handleClickAddCircuit={handleClickOpenDialog}
-                  handleEditCircuit={handleEditCircuit}
-                  handleRemoveCircuit={handleRemoveCircuit}
-                />
-                <SearchIconsDialog
-                  open={openDialog}
-                  handleClose={handleCloseDialog}
-                  handleSelect={handleClickSelect}
+              <h3>Base</h3>
+              <div className="section">
+                <BaseShapeButtons
+                  baseShape={baseShape}
+                  handleBaseShapeChange={handleBaseShapeChange}
                 />
               </div>
+              <h3>Circuit</h3>
+              <CircuitList
+                circuits={circuits}
+                handleClickAddCircuit={handleClickOpenDialog}
+                handleEditCircuit={handleEditCircuit}
+                handleRemoveCircuit={handleRemoveCircuit}
+              />
+              <SearchIconsDialog
+                open={openDialog}
+                handleClose={handleCloseDialog}
+                handleSelect={handleClickSelect}
+              />
             </div>
-
             <div className="section" id="circuit-result-section">
-              <div>
-                <h1>Result</h1>
-                <Canvas baseShape={baseShape} circuits={circuits} />
-                <div className="button">
-                  <ExportButton />
-                </div>
+              <h3>Result</h3>
+              <Canvas baseShape={baseShape} circuits={circuits} />
+              <div className="button">
+                <ExportButton />
               </div>
             </div>
           </div>

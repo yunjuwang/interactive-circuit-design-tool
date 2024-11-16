@@ -6,12 +6,11 @@ import Select from "@mui/material/Select";
 
 export function InputSelect({ input, handleInputChange }) {
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 120 }} id="input-select">
       <FormControl fullWidth>
         <InputLabel id="input-select-label">Input</InputLabel>
         <Select
           labelId="input-select-label"
-          id="input-select"
           value={input}
           label="Input"
           onChange={handleInputChange}
@@ -26,12 +25,11 @@ export function InputSelect({ input, handleInputChange }) {
 }
 export function OutputSelect({ output, handleOutputChange }) {
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 120 }} id="output-select">
       <FormControl fullWidth>
         <InputLabel id="output-select-label">Output</InputLabel>
         <Select
           labelId="output-select-label"
-          id="output-select"
           value={output}
           label="Output"
           onChange={handleOutputChange}

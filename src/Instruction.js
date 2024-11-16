@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem, { timelineItemClasses } from "@mui/lab/TimelineItem";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
@@ -6,6 +7,7 @@ import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
 
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import DrawIcon from "@mui/icons-material/Draw";
@@ -51,6 +53,26 @@ export function Step({ step, title, desc, children }) {
       </div>
     );
   }
+  function CompletedButton() {
+    const [completed, setCompleted] = useState(false);
+    return (
+      <div className="next-step">
+        <Button variant="outlined" onClick={() => setCompleted(true)}>
+          Completed!
+        </Button>
+        {completed ? (
+          <h4>
+            Thank you for participating in the workshop! :3 &#128151; <br />
+            Please help to fill out the{" "}
+            <Link href="https://forms.gle/Wtu8Z8riBnyMFSvD7" target="_blank">
+              questionnaire
+            </Link>{" "}
+            !
+          </h4>
+        ) : undefined}
+      </div>
+    );
+  }
   return (
     <TimelineItem id={"step-" + step}>
       <TimelineSeparator>
@@ -63,7 +85,7 @@ export function Step({ step, title, desc, children }) {
         </Typography>
         <Typography color="text.secondary">{desc}</Typography>
         {children}
-        {step != 5 ? <NextStepButton /> : undefined}
+        {step != 5 ? <NextStepButton /> : <CompletedButton />}
       </TimelineContent>
     </TimelineItem>
   );
