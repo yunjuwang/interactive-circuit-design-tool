@@ -3,9 +3,12 @@ import { IconResolver } from "./IconUtils.js";
 import { InputSlider } from "./Slider.js";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
+import ToggleButton from "@mui/material/ToggleButton";
 import IconButton from "@mui/material/IconButton";
+
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
+import LockIcon from "@mui/icons-material/Lock";
 
 function CircuitEditor({
   editingId,
@@ -18,6 +21,7 @@ function CircuitEditor({
   const [scaleX, setScaleX] = useState(0.5);
   const [scaleY, setScaleY] = useState(0.5);
   const [rotate, setRotate] = useState(0);
+  const [lockScale, setLockScale] = useState(true);
   useEffect(() => {
     if (editingId === "" || editingCircuit === undefined) return;
 
@@ -44,6 +48,17 @@ function CircuitEditor({
     handleEdit(newCircuit);
   }, [x, y, scaleX, scaleY, rotate]);
 
+  function SetScaleX_locked(scale) {
+    let diff = scale - scaleX;
+    setScaleX(scale);
+    setScaleY(scaleY + diff);
+  }
+  function SetScaleY_locked(scale) {
+    let diff = scale - scaleY;
+    setScaleX(scaleX + diff);
+    setScaleY(scale);
+  }
+
   return (
     <div className="section">
       <div className="circuit-edior-delete-btn">
@@ -60,13 +75,25 @@ function CircuitEditor({
           <InputSlider InputName="Y" value={y} setValue={setY} />
         </div>
       </div>
-      <h4 className="circuit-edior-title">Scale</h4>
+      <h4 className="circuit-edior-title">
+        Scale
+        <ToggleButton
+          size="small"
+          value="lockScale"
+          selected={lockScale}
+          onChange={() => setLockScale((prev) => !prev)}
+          sx={{ marginLeft: "5px", padding: "0px" }}
+        >
+          <LockIcon />
+        </ToggleButton>
+      </h4>
+
       <div className="slider-section">
         <div className="slider slider-x">
           <InputSlider
             InputName="X"
             value={scaleX}
-            setValue={setScaleX}
+            setValue={lockScale ? SetScaleX_locked : setScaleX}
             minValue={-1}
             maxValue={1}
             step={0.01}
@@ -77,7 +104,7 @@ function CircuitEditor({
             className="slider"
             InputName="Y"
             value={scaleY}
-            setValue={setScaleY}
+            setValue={lockScale ? SetScaleY_locked : setScaleY}
             minValue={-1}
             maxValue={1}
             step={0.01}
