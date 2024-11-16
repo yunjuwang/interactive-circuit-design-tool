@@ -5,7 +5,7 @@ import Slider from "@mui/material/Slider";
 import MuiInput from "@mui/material/Input";
 
 const Input = styled(MuiInput)`
-  width: 48px;
+  width: 40px;
 `;
 
 export function InputSlider({
