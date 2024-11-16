@@ -36,6 +36,7 @@ function App() {
         scaleX: 0.5,
         scaleY: 0.5,
         rotate: 0,
+        flip: false,
       },
     ]);
     setCurrCircuitId(currCircuitId + 1);

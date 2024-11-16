@@ -7,11 +7,14 @@ const DrawBase = ({
   scaleX = 1,
   scaleY = 1,
   rotate = 0,
+  flip = false,
 }) => {
   return (
     <IconResolver
       iconName={shape}
-      transform={`translate(${x} ${y}) scale(${scaleX} ${scaleY}) rotate(${rotate})`}
+      transform={`translate(${x} ${y}) scale(${
+        flip ? -scaleX : scaleX
+      } ${scaleY}) rotate(${rotate})`}
       sx={{
         position: "absolute",
         fontSize: 500,
@@ -30,11 +33,14 @@ const DrawCircuit = ({
   scaleX = 0.5,
   scaleY = 0.5,
   rotate = 0,
+  flip = false,
 }) => {
   return (
     <IconResolver
       iconName={shape}
-      transform={`translate(${x} ${y}) rotate(${rotate}) scale(${scaleX} ${scaleY}) `}
+      transform={`translate(${x} ${y}) rotate(${rotate}) scale(${
+        flip ? -scaleX : scaleX
+      } ${scaleY}) `}
       sx={{
         position: "absolute",
         fontSize: 500,
@@ -60,6 +66,7 @@ export default function Canvas({ baseShape = "Circle", circuits }) {
           scaleX={circuit.scaleX}
           scaleY={circuit.scaleY}
           rotate={circuit.rotate}
+          flip={circuit.flip}
         />
       ))}
     </div>

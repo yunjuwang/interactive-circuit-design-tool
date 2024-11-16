@@ -9,6 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
 import LockIcon from "@mui/icons-material/Lock";
+import FlipIcon from "@mui/icons-material/Flip";
 
 function CircuitEditor({
   editingId,
@@ -22,6 +23,8 @@ function CircuitEditor({
   const [scaleY, setScaleY] = useState(0.5);
   const [rotate, setRotate] = useState(0);
   const [lockScale, setLockScale] = useState(true);
+  const [flip, setFlip] = useState(false);
+
   useEffect(() => {
     if (editingId === "" || editingCircuit === undefined) return;
 
@@ -30,6 +33,7 @@ function CircuitEditor({
     setScaleX(editingCircuit.scaleX);
     setScaleY(editingCircuit.scaleY);
     setRotate(editingCircuit.rotate);
+    setFlip(editingCircuit.flip);
   }, [editingId]);
 
   useEffect(() => {
@@ -44,9 +48,10 @@ function CircuitEditor({
       scaleX: scaleX,
       scaleY: scaleY,
       rotate: rotate,
+      flip: flip,
     };
     handleEdit(newCircuit);
-  }, [x, y, scaleX, scaleY, rotate]);
+  }, [x, y, scaleX, scaleY, rotate, flip]);
 
   function SetScaleX_locked(scale) {
     let diff = scale - scaleX;
@@ -86,6 +91,15 @@ function CircuitEditor({
         >
           <LockIcon />
         </ToggleButton>
+        <ToggleButton
+          size="small"
+          value="flip"
+          selected={flip}
+          onChange={() => setFlip((prev) => !prev)}
+          sx={{ marginLeft: "5px", padding: "0px" }}
+        >
+          <FlipIcon />
+        </ToggleButton>
       </h4>
 
       <div className="slider-section">
@@ -94,7 +108,7 @@ function CircuitEditor({
             InputName="X"
             value={scaleX}
             setValue={lockScale ? SetScaleX_locked : setScaleX}
-            minValue={-1}
+            minValue={0}
             maxValue={1}
             step={0.01}
           />
@@ -105,7 +119,7 @@ function CircuitEditor({
             InputName="Y"
             value={scaleY}
             setValue={lockScale ? SetScaleY_locked : setScaleY}
-            minValue={-1}
+            minValue={0}
             maxValue={1}
             step={0.01}
           />
