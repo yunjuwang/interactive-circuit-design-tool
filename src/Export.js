@@ -112,9 +112,14 @@ function GenerateSvgFromCanvas(canvas) {
         var styleString = "";
 
         for (var st = 0; st < RelevantStyles[tagName].length; st++) {
-          styleString += `${
+          // replace editing circuit color
+          let propertyValue = svgStyle.getPropertyValue(
             RelevantStyles[tagName][st]
-          }:${svgStyle.getPropertyValue(RelevantStyles[tagName][st])}; `;
+          );
+          if (propertyValue == "rgba(25, 118, 210, 0.3)") {
+            propertyValue = "rgba(0, 0, 0, 0.2)";
+          }
+          styleString += `${RelevantStyles[tagName][st]}:${propertyValue}; `;
         }
 
         newElementNode.setAttribute("style", styleString);

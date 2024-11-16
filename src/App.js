@@ -24,6 +24,8 @@ function App() {
   // Circuit
   const [currCircuitId, setCurrCircuitId] = useState(0);
   const [circuits, setCircuits] = useState([]);
+  const [editingId, setEditingId] = useState(0);
+
   const handleAddCircuit = (selectedIcon) => {
     setCircuits([
       ...circuits, // old items
@@ -94,6 +96,8 @@ function App() {
               <h3>Circuit</h3>
               <CircuitList
                 circuits={circuits}
+                editingId={editingId}
+                handleSetEditingId={setEditingId}
                 handleClickAddCircuit={handleClickOpenDialog}
                 handleEditCircuit={handleEditCircuit}
                 handleRemoveCircuit={handleRemoveCircuit}
@@ -106,7 +110,11 @@ function App() {
             </div>
             <div className="section" id="circuit-result-section">
               <h3>Result</h3>
-              <Canvas baseShape={baseShape} circuits={circuits} />
+              <Canvas
+                baseShape={baseShape}
+                circuits={circuits}
+                editingId={editingId}
+              />
               <div className="button">
                 <ExportButton />
               </div>

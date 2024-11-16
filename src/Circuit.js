@@ -54,12 +54,12 @@ function CircuitEditor({
   }, [x, y, scaleX, scaleY, rotate, flip]);
 
   function SetScaleX_locked(scale) {
-    let diff = scale - scaleX;
+    const diff = scale - scaleX;
     setScaleX(scale);
     setScaleY(scaleY + diff);
   }
   function SetScaleY_locked(scale) {
-    let diff = scale - scaleY;
+    const diff = scale - scaleY;
     setScaleX(scaleX + diff);
     setScaleY(scale);
   }
@@ -141,11 +141,13 @@ function CircuitEditor({
 
 export function CircuitList({
   circuits,
+  editingId,
+  handleSetEditingId,
   handleClickAddCircuit,
   handleEditCircuit,
   handleRemoveCircuit,
 }) {
-  const [editingId, setEditingId] = useState(0);
+  // const [editingId, setEditingId] = useState(0);
   const editingCircuit = circuits.find((circuit) => circuit.id == editingId);
   return (
     <>
@@ -154,7 +156,7 @@ export function CircuitList({
           {circuits.map((circuit) => (
             <IconButton
               key={circuit.id}
-              onClick={() => setEditingId(circuit.id)}
+              onClick={() => handleSetEditingId(circuit.id)}
               color={editingId == circuit.id ? "primary" : "default"}
             >
               <IconResolver iconName={circuit.shape} />
