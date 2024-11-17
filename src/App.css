@@ -71,10 +71,10 @@ body {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.circuit-edior-title {
+.edior-title {
   margin: 10px 0px 8px 0px;
 }
-.circuit-edior-delete-btn {
+.edior-delete-btn {
   position: absolute;
   right: 16px;
   top: 8px;

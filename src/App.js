@@ -1,11 +1,12 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./Header";
 import Canvas from "./Canvas";
 import SearchIconsDialog from "./Dialog.js";
 import { InputSelect, OutputSelect } from "./SystemIO.js";
 import { BaseOptions, BaseList } from "./Base.js";
 import { CircuitList } from "./Circuit.js";
+import { Editor } from "./Editor.js";
 import { PatternOptions } from "./Pattern.js";
 import { ExportButton } from "./Export.js";
 
@@ -21,13 +22,30 @@ function App() {
 
   // unique id shared by base & circuit
   const [currId, setCurrId] = useState(0);
+  const [items, setItems] = useState([]);
+  const [editingId, setEditingId] = useState(-1);
+  const [editingItem, setEditingItem] = useState(undefined);
+
+  useEffect(() => {
+    setEditingItem(items.find((item) => item.id == editingId));
+  }, [editingId]);
+
+  const handleRemoveItem = (removeId) => {
+    setItems(items.filter((item) => item.id != removeId));
+    setEditingId(-1);
+  };
+
+  const handleEditItem = (editId, newItem) => {
+    setItems(items.map((item) => (item.id == editId ? newItem : item)));
+  };
+
   // Base
-  const [bases, setBases] = useState([]);
   const handleAddBase = (selectedIcon) => {
-    setBases([
-      ...bases, // old items
+    setItems([
+      ...items, // old items
       {
         id: currId,
+        type: "base",
         shape: selectedIcon,
         size: 300,
         x: 0,
@@ -38,18 +56,17 @@ function App() {
         flip: false,
       },
     ]);
+    setEditingId(currId);
     setCurrId(currId + 1);
   };
 
   // Circuit
-  const [circuits, setCircuits] = useState([]);
-  const [editingId, setEditingId] = useState(0);
-
   const handleAddCircuit = (selectedIcon) => {
-    setCircuits([
-      ...circuits, // old items
+    setItems([
+      ...items, // old items
       {
         id: currId,
+        type: "circuit",
         shape: selectedIcon,
         size: 300,
         x: 0,
@@ -60,15 +77,9 @@ function App() {
         flip: false,
       },
     ]);
+    setEditingId(currId);
     setCurrId(currId + 1);
   };
-  const handleEditCircuit = (editId, newCircuit) => {
-    setCircuits(
-      circuits.map((circuit) => (circuit.id == editId ? newCircuit : circuit))
-    );
-  };
-  const handleRemoveCircuit = (removeId) =>
-    setCircuits(circuits.filter((circuit) => circuit.id != removeId));
 
   //Select Icon Dialog
   const [openDialog, setOpenDialog] = useState(false);
@@ -107,7 +118,7 @@ function App() {
             <div className="section" id="circuit-edit-section">
               <h3>Base</h3>
               <BaseList
-                bases={bases}
+                bases={items.filter((item) => item.type == "base")}
                 editingId={editingId}
                 handleSetEditingId={setEditingId}
               />
@@ -120,13 +131,24 @@ function App() {
               </div>
 
               <CircuitList
-                circuits={circuits}
+                circuits={items.filter((item) => item.type == "circuit")}
                 editingId={editingId}
                 handleSetEditingId={setEditingId}
                 handleClickAddCircuit={handleClickOpenDialog}
-                handleEditCircuit={handleEditCircuit}
-                handleRemoveCircuit={handleRemoveCircuit}
               />
+              <h3>Editor</h3>
+              {editingId === -1 ? (
+                <>Select Editing Item First</>
+              ) : (
+                <Editor
+                  editingId={editingId}
+                  editingItem={editingItem}
+                  handleEdit={(newItem) =>
+                    handleEditItem(editingItem.id, newItem)
+                  }
+                  handleDelete={() => handleRemoveItem(editingId)}
+                />
+              )}
               <SearchIconsDialog
                 open={openDialog}
                 handleClose={handleCloseDialog}
@@ -135,7 +157,11 @@ function App() {
             </div>
             <div className="section" id="circuit-result-section">
               <h3>Result</h3>
-              <Canvas bases={bases} circuits={circuits} editingId={editingId} />
+              <Canvas
+                bases={items.filter((item) => item.type == "base")}
+                circuits={items.filter((item) => item.type == "circuit")}
+                editingId={editingId}
+              />
               <div className="button">
                 <ExportButton />
               </div>
