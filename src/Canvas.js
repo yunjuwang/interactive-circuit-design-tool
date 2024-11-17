@@ -1,4 +1,4 @@
-import { IconResolver } from "./IconUtils.js";
+import { IconResolver, PatternResolver } from "./IconUtils.js";
 
 const DrawBase = ({
   shape = "Circle",
@@ -36,7 +36,6 @@ const DrawCircuit = ({
   flip = false,
   editing = false,
 }) => {
-  console.log(editing);
   return (
     <IconResolver
       iconName={shape}
@@ -54,11 +53,38 @@ const DrawCircuit = ({
   );
 };
 
+const DrawPattern = ({
+  shape = "pattern_corner_1",
+  x = 0,
+  y = 0,
+  scaleX = 1,
+  scaleY = 1,
+  rotate = 0,
+  flip = false,
+  editing = false,
+}) => {
+  return (
+    <PatternResolver
+      patternName={shape}
+      transform={`translate(${x} ${y}) rotate(${rotate}) scale(${
+        flip ? -scaleX : scaleX
+      } ${scaleY}) `}
+      style={{
+        position: "absolute",
+        stroke: "#000",
+        strokeWidth: "0.1px",
+        fill: editing ? "rgba(25, 118, 210, 0.3)" : "rgba(0, 0, 0, 0.2)",
+      }}
+    />
+  );
+};
+
 export default function Canvas({ baseShape = "Circle", circuits, editingId }) {
-  console.log(editingId);
   return (
     <div id="canvas">
       {baseShape ? <DrawBase shape={baseShape} /> : null}
+
+      <DrawPattern />
 
       {circuits.map((circuit) => (
         <DrawCircuit

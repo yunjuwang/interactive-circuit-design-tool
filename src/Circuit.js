@@ -108,7 +108,7 @@ function CircuitEditor({
             InputName="X"
             value={scaleX}
             setValue={lockScale ? SetScaleX_locked : setScaleX}
-            minValue={0}
+            minValue={0.01}
             maxValue={1}
             step={0.01}
           />
@@ -119,7 +119,7 @@ function CircuitEditor({
             InputName="Y"
             value={scaleY}
             setValue={lockScale ? SetScaleY_locked : setScaleY}
-            minValue={0}
+            minValue={0.01}
             maxValue={1}
             step={0.01}
           />
