@@ -9,6 +9,7 @@ import { CircuitList } from "./Circuit.js";
 import { ExportButton } from "./Export.js";
 
 import { Instruction, Step, GetWireColor } from "./Instruction.js";
+import { LaserCutImg, DrawCircuitImg } from "./Image.js";
 
 function App() {
   // system I/O
@@ -130,18 +131,26 @@ function App() {
               <b style={{ color: "black" }}>BLACK</b> parts
             </>
           }
-        ></Step>
+        >
+          <LaserCutImg />
+        </Step>
         <Step
           step={4}
           title="3D pen & Conductive Filament"
+          desc={"Trace over the engraved sections"}
+        >
+          <DrawCircuitImg />
+        </Step>
+        <Step
+          step={5}
+          title="Connect"
           desc={
             <>
-              Trace over the engraved sections, and connect the{" "}
-              {GetWireColor(output)} wire from the output module
+              Connect the {GetWireColor(output)} wire from the output module and
+              complete!
             </>
           }
         ></Step>
-        <Step step={5} title="Connect" desc={""}></Step>
       </Instruction>
     </div>
   );

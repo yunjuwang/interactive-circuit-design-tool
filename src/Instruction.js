@@ -18,13 +18,13 @@ import SettingsInputComponentIcon from "@mui/icons-material/SettingsInputCompone
 export function GetWireColor(output) {
   switch (output) {
     case "output_led":
-      return <span style={{ color: "orange" }}>ORANGE</span>;
+      return <b style={{ color: "orange" }}>ORANGE</b>;
 
     case "output_sound":
-      return <span style={{ color: "green" }}>GREEN</span>;
+      return <b style={{ color: "green" }}>GREEN</b>;
 
     case "output_vibration":
-      return <span style={{ color: "blue" }}>BLUE</span>;
+      return <b style={{ color: "blue" }}>BLUE</b>;
 
     default:
       return;
