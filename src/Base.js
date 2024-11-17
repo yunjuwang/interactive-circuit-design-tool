@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
 
-import { IconResolver } from "./IconUtils.js";
+import { IconResolver } from "./Utils.js";
 
 const BASE_SHAPE_LIST = [
   "Circle",

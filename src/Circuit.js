@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { IconResolver } from "./IconUtils.js";
+import { IconResolver } from "./Utils.js";
 import { InputSlider } from "./Slider.js";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";

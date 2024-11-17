@@ -6,6 +6,7 @@ import SearchIconsDialog from "./Dialog.js";
 import { InputSelect, OutputSelect } from "./SystemIO.js";
 import { BaseShapeButtons, BaseSizeSlider } from "./Base.js";
 import { CircuitList } from "./Circuit.js";
+import { PatternOptions } from "./Pattern.js";
 import { ExportButton } from "./Export.js";
 
 import { Instruction, Step, GetWireColor } from "./Instruction.js";
@@ -95,6 +96,10 @@ function App() {
                 />
               </div>
               <h3>Circuit</h3>
+              <div className="section">
+                <PatternOptions />
+              </div>
+
               <CircuitList
                 circuits={circuits}
                 editingId={editingId}

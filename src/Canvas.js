@@ -1,4 +1,4 @@
-import { IconResolver, PatternResolver } from "./IconUtils.js";
+import { IconResolver, PatternResolver } from "./Utils.js";
 
 const DrawBase = ({
   shape = "Circle",
