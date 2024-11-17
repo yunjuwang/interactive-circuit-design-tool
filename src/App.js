@@ -4,7 +4,7 @@ import Header from "./Header";
 import Canvas from "./Canvas";
 import SearchIconsDialog from "./Dialog.js";
 import { InputSelect, OutputSelect } from "./SystemIO.js";
-import { BaseShapeButtons, BaseSizeSlider } from "./Base.js";
+import { BaseOptions, BaseList } from "./Base.js";
 import { CircuitList } from "./Circuit.js";
 import { PatternOptions } from "./Pattern.js";
 import { ExportButton } from "./Export.js";
@@ -19,12 +19,29 @@ function App() {
   const [output, setOutput] = useState("");
   const handleOutputChange = (event) => setOutput(event.target.value);
 
+  // unique id shared by base & circuit
+  const [currId, setCurrId] = useState(0);
   // Base
-  const [baseShape, setBaseShape] = useState("");
-  const handleBaseShapeChange = (shape) => setBaseShape(shape);
+  const [bases, setBases] = useState([]);
+  const handleAddBase = (selectedIcon) => {
+    setBases([
+      ...bases, // old items
+      {
+        id: currId,
+        shape: selectedIcon,
+        size: 300,
+        x: 0,
+        y: 0,
+        scaleX: 1,
+        scaleY: 1,
+        rotate: 0,
+        flip: false,
+      },
+    ]);
+    setCurrId(currId + 1);
+  };
 
   // Circuit
-  const [currCircuitId, setCurrCircuitId] = useState(0);
   const [circuits, setCircuits] = useState([]);
   const [editingId, setEditingId] = useState(0);
 
@@ -32,7 +49,7 @@ function App() {
     setCircuits([
       ...circuits, // old items
       {
-        id: currCircuitId,
+        id: currId,
         shape: selectedIcon,
         size: 300,
         x: 0,
@@ -43,7 +60,7 @@ function App() {
         flip: false,
       },
     ]);
-    setCurrCircuitId(currCircuitId + 1);
+    setCurrId(currId + 1);
   };
   const handleEditCircuit = (editId, newCircuit) => {
     setCircuits(
@@ -89,11 +106,13 @@ function App() {
           <div className="container">
             <div className="section" id="circuit-edit-section">
               <h3>Base</h3>
+              <BaseList
+                bases={bases}
+                editingId={editingId}
+                handleSetEditingId={setEditingId}
+              />
               <div className="section">
-                <BaseShapeButtons
-                  baseShape={baseShape}
-                  handleBaseShapeChange={handleBaseShapeChange}
-                />
+                <BaseOptions handleAddBase={handleAddBase} />
               </div>
               <h3>Circuit</h3>
               <div className="section">
@@ -116,11 +135,7 @@ function App() {
             </div>
             <div className="section" id="circuit-result-section">
               <h3>Result</h3>
-              <Canvas
-                baseShape={baseShape}
-                circuits={circuits}
-                editingId={editingId}
-              />
+              <Canvas bases={bases} circuits={circuits} editingId={editingId} />
               <div className="button">
                 <ExportButton />
               </div>

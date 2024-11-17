@@ -8,6 +8,7 @@ const DrawBase = ({
   scaleY = 1,
   rotate = 0,
   flip = false,
+  editing = false,
 }) => {
   return (
     <IconResolver
@@ -18,7 +19,7 @@ const DrawBase = ({
       sx={{
         position: "absolute",
         fontSize: 500,
-        stroke: "#ff0000",
+        stroke: editing ? "rgba(25, 118, 210, 1)" : "#ff0000",
         strokeWidth: "0.1px",
         fill: "none",
       }}
@@ -79,10 +80,22 @@ const DrawPattern = ({
   );
 };
 
-export default function Canvas({ baseShape = "Circle", circuits, editingId }) {
+export default function Canvas({ bases, circuits, editingId }) {
   return (
     <div id="canvas">
-      {baseShape ? <DrawBase shape={baseShape} /> : null}
+      {bases.map((base) => (
+        <DrawBase
+          key={base.id}
+          shape={base.shape}
+          x={base.x}
+          y={base.y}
+          scaleX={base.scaleX}
+          scaleY={base.scaleY}
+          rotate={base.rotate}
+          flip={base.flip}
+          editing={base.id == editingId}
+        />
+      ))}
 
       <DrawPattern />
 

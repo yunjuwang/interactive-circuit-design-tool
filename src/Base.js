@@ -48,14 +48,53 @@ export function BaseSizeSlider({ baseSize, handleBaseSizeChange }) {
   );
 }
 
-export function BaseShapeButtons({ baseShape, handleBaseShapeChange }) {
+export function BaseList({ bases, editingId, handleSetEditingId }) {
+  const editingBase = bases.find((base) => base.id == editingId);
+  return (
+    <>
+      <div id="circuit-list">
+        <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: "wrap" }}>
+          {bases.map((bases) => (
+            <IconButton
+              key={bases.id}
+              onClick={() => handleSetEditingId(bases.id)}
+              color={editingId == bases.id ? "primary" : "default"}
+            >
+              <IconResolver iconName={bases.shape} />
+            </IconButton>
+          ))}
+        </Stack>
+        {/* <Button
+          variant="contained"
+          startIcon={<AddIcon />}
+          onClick={handleClickAddCircuit}
+        >
+          Add New Pattern
+        </Button> */}
+      </div>
+
+      {/* {editingId === "" || editingCircuit === undefined ? null : (
+        <CircuitEditor
+          editingId={editingCircuit.id}
+          editingCircuit={editingCircuit}
+          handleEdit={(newCircuit) =>
+            handleEditCircuit(editingCircuit.id, newCircuit)
+          }
+          handleDelete={() => handleRemoveCircuit(editingCircuit.id)}
+        />
+      )} */}
+    </>
+  );
+}
+
+export function BaseOptions({ handleAddBase }) {
   return (
     <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: "wrap" }}>
       {BASE_SHAPE_LIST.map((shape) => (
         <IconButton
           key={shape}
-          onClick={() => handleBaseShapeChange(shape)}
-          color={baseShape == shape ? "primary" : "default"}
+          onClick={() => handleAddBase(shape)}
+          // color={baseShape == shape ? "primary" : "default"}
         >
           <IconResolver iconName={shape} />
         </IconButton>
