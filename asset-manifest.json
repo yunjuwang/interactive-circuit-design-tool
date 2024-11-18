@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/interactive-circuits-toolkit/static/css/main.460176e7.css",
-    "main.js": "/interactive-circuits-toolkit/static/js/main.6ed1d1f9.js",
+    "main.js": "/interactive-circuits-toolkit/static/js/main.72b0c5d5.js",
     "static/media/laser_cut_2.jpg": "/interactive-circuits-toolkit/static/media/laser_cut_2.484a2aabcf7e07c06052.jpg",
     "static/media/draw_1.jpg": "/interactive-circuits-toolkit/static/media/draw_1.acccf4301f0ae495cc4e.jpg",
     "static/media/3d_pen.jpg": "/interactive-circuits-toolkit/static/media/3d_pen.ac2a94b4f57bf49dbde0.jpg",
@@ -24,10 +24,10 @@
     "static/media/pattern_line_1.svg": "/interactive-circuits-toolkit/static/media/pattern_line_1.4d0e96ab3c5ee860d16a9d5b801b574b.svg",
     "static/media/pattern_line_2.svg": "/interactive-circuits-toolkit/static/media/pattern_line_2.51678c923711a92dfc000307b76ca7e3.svg",
     "main.460176e7.css.map": "/interactive-circuits-toolkit/static/css/main.460176e7.css.map",
-    "main.6ed1d1f9.js.map": "/interactive-circuits-toolkit/static/js/main.6ed1d1f9.js.map"
+    "main.72b0c5d5.js.map": "/interactive-circuits-toolkit/static/js/main.72b0c5d5.js.map"
   },
   "entrypoints": [
     "static/css/main.460176e7.css",
-    "static/js/main.6ed1d1f9.js"
+    "static/js/main.72b0c5d5.js"
   ]
 }
