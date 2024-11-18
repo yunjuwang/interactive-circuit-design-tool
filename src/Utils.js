@@ -48,7 +48,7 @@ export const PatternResolver = ({ patternName, color, ...props }) => {
         fill:
           color == "primary"
             ? "rgba(25, 118, 210, 1)"
-            : color == "defalut"
+            : color == "default"
             ? "rgba(0, 0, 0, 0.54)"
             : color,
       }}
