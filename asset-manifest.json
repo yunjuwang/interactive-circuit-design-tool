@@ -1,13 +1,33 @@
 {
   "files": {
-    "main.css": "/interactive-circuits-toolkit/static/css/main.00a5bf21.css",
-    "main.js": "/interactive-circuits-toolkit/static/js/main.85e4f980.js",
+    "main.css": "/interactive-circuits-toolkit/static/css/main.460176e7.css",
+    "main.js": "/interactive-circuits-toolkit/static/js/main.6ed1d1f9.js",
+    "static/media/laser_cut_2.jpg": "/interactive-circuits-toolkit/static/media/laser_cut_2.484a2aabcf7e07c06052.jpg",
+    "static/media/draw_1.jpg": "/interactive-circuits-toolkit/static/media/draw_1.acccf4301f0ae495cc4e.jpg",
+    "static/media/3d_pen.jpg": "/interactive-circuits-toolkit/static/media/3d_pen.ac2a94b4f57bf49dbde0.jpg",
+    "static/media/laser_cut_1.jpg": "/interactive-circuits-toolkit/static/media/laser_cut_1.ba67d4b8a496ae633259.jpg",
+    "static/media/filament.jpg": "/interactive-circuits-toolkit/static/media/filament.30af3055f8d59cd83c1f.jpg",
+    "static/media/laser_cut_0.jpg": "/interactive-circuits-toolkit/static/media/laser_cut_0.1d95bc45641045e0ebdb.jpg",
+    "static/media/pattern_tree.svg": "/interactive-circuits-toolkit/static/media/pattern_tree.69945a93f2d929bcbb3beab141fd302f.svg",
+    "static/media/pattern_zigzag_4.svg": "/interactive-circuits-toolkit/static/media/pattern_zigzag_4.40cd77ee5a292e93975edf2f5dfe71c8.svg",
+    "static/media/pattern_zigzag_3.svg": "/interactive-circuits-toolkit/static/media/pattern_zigzag_3.686013b3944798104143ad9debd53747.svg",
+    "static/media/pattern_zigzag_2.svg": "/interactive-circuits-toolkit/static/media/pattern_zigzag_2.c4e02df31c2ec358d122b80a28e8fa0a.svg",
+    "static/media/pattern_zigzag_1.svg": "/interactive-circuits-toolkit/static/media/pattern_zigzag_1.3b46b95b0677b28006a3b1a4ed514af0.svg",
+    "static/media/pattern_zigzag2_2.svg": "/interactive-circuits-toolkit/static/media/pattern_zigzag2_2.32e9563bb3ba03ba70c9c2b0cb52c9e5.svg",
+    "static/media/pattern_zigzag2_1.svg": "/interactive-circuits-toolkit/static/media/pattern_zigzag2_1.4f2fd16be136dd7920c22a6f58d5e605.svg",
+    "static/media/pattern_zigzag2_3.svg": "/interactive-circuits-toolkit/static/media/pattern_zigzag2_3.de0c2d7725cba4dca56f7296a843110f.svg",
     "index.html": "/interactive-circuits-toolkit/index.html",
-    "main.00a5bf21.css.map": "/interactive-circuits-toolkit/static/css/main.00a5bf21.css.map",
-    "main.85e4f980.js.map": "/interactive-circuits-toolkit/static/js/main.85e4f980.js.map"
+    "static/media/pattern_dot.svg": "/interactive-circuits-toolkit/static/media/pattern_dot.868f88bde2d627c0bb214c6188dc2744.svg",
+    "static/media/pattern_corner_1.svg": "/interactive-circuits-toolkit/static/media/pattern_corner_1.501b50a03e5d52ce3b24fbfdfb427d69.svg",
+    "static/media/pattern_corner_2.svg": "/interactive-circuits-toolkit/static/media/pattern_corner_2.c2c30e3950b490342196d6365f8ea0d5.svg",
+    "static/media/pattern_end.svg": "/interactive-circuits-toolkit/static/media/pattern_end.be2e8cdf1cab0638330e1e7c0de2f5a7.svg",
+    "static/media/pattern_line_1.svg": "/interactive-circuits-toolkit/static/media/pattern_line_1.4d0e96ab3c5ee860d16a9d5b801b574b.svg",
+    "static/media/pattern_line_2.svg": "/interactive-circuits-toolkit/static/media/pattern_line_2.51678c923711a92dfc000307b76ca7e3.svg",
+    "main.460176e7.css.map": "/interactive-circuits-toolkit/static/css/main.460176e7.css.map",
+    "main.6ed1d1f9.js.map": "/interactive-circuits-toolkit/static/js/main.6ed1d1f9.js.map"
   },
   "entrypoints": [
-    "static/css/main.00a5bf21.css",
-    "static/js/main.85e4f980.js"
+    "static/css/main.460176e7.css",
+    "static/js/main.6ed1d1f9.js"
   ]
 }
