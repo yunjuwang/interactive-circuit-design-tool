@@ -97,21 +97,33 @@ export default function Canvas({ bases, circuits, editingId }) {
         />
       ))}
 
-      <DrawPattern />
-
-      {circuits.map((circuit) => (
-        <DrawCircuit
-          key={circuit.id}
-          shape={circuit.shape}
-          x={circuit.x}
-          y={circuit.y}
-          scaleX={circuit.scaleX}
-          scaleY={circuit.scaleY}
-          rotate={circuit.rotate}
-          flip={circuit.flip}
-          editing={circuit.id == editingId}
-        />
-      ))}
+      {circuits.map((item) =>
+        item.type == "circuit" ? (
+          <DrawCircuit
+            key={item.id}
+            shape={item.shape}
+            x={item.x}
+            y={item.y}
+            scaleX={item.scaleX}
+            scaleY={item.scaleY}
+            rotate={item.rotate}
+            flip={item.flip}
+            editing={item.id == editingId}
+          />
+        ) : item.type == "pattern" ? (
+          <DrawPattern
+            key={item.id}
+            shape={item.shape}
+            x={item.x}
+            y={item.y}
+            scaleX={item.scaleX}
+            scaleY={item.scaleY}
+            rotate={item.rotate}
+            flip={item.flip}
+            editing={item.id == editingId}
+          />
+        ) : undefined
+      )}
     </div>
   );
 }

@@ -21,20 +21,16 @@ const PATTERN_LIST = [
   "pattern_tree",
 ];
 
-export function PatternOptions({}) {
+export function PatternOptions({ handleAddPattern }) {
   return (
     <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: "wrap" }}>
       {PATTERN_LIST.map((shape) => (
-        <IconButton
-          key={shape}
-          // onClick={() => handleBaseShapeChange(shape)}
-          // color={baseShape == shape ? "primary" : "default"}
-          color="defalut"
-        >
+        <IconButton key={shape} onClick={() => handleAddPattern(shape)}>
           <PatternResolver
             patternName={shape}
             width="24px"
             height="24px"
+            color="defalut"
             transform={shape == "pattern_tree" ? "scale(2 2)" : "scale(3 3)"}
           />
         </IconButton>

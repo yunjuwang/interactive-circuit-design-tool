@@ -1,17 +1,20 @@
 import "./App.css";
 import { useState, useEffect } from "react";
+import Typography from "@mui/material/Typography";
+
 import Header from "./Header";
 import Canvas from "./Canvas";
 import SearchIconsDialog from "./Dialog.js";
 import { InputSelect, OutputSelect } from "./SystemIO.js";
 import { BaseOptions, BaseList } from "./Base.js";
-import { CircuitList } from "./Circuit.js";
+import { CircuitList, AddMoreCircuitButton } from "./Circuit.js";
 import { Editor } from "./Editor.js";
 import { PatternOptions } from "./Pattern.js";
 import { ExportButton } from "./Export.js";
-
 import { Instruction, Step, GetWireColor } from "./Instruction.js";
 import { LaserCutImg, DrawCircuitImg } from "./Image.js";
+
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 function App() {
   // system I/O
@@ -20,9 +23,9 @@ function App() {
   const [output, setOutput] = useState("");
   const handleOutputChange = (event) => setOutput(event.target.value);
 
-  // unique id shared by base & circuit
-  const [currId, setCurrId] = useState(0);
+  // Items (bases & circuits)
   const [items, setItems] = useState([]);
+  const [currId, setCurrId] = useState(0); // unique id
   const [editingId, setEditingId] = useState(-1);
   const [editingItem, setEditingItem] = useState(undefined);
 
@@ -81,6 +84,27 @@ function App() {
     setCurrId(currId + 1);
   };
 
+  // Pattern
+  const handleAddPattern = (selectedShape) => {
+    setItems([
+      ...items, // old items
+      {
+        id: currId,
+        type: "pattern",
+        shape: selectedShape,
+        size: 300,
+        x: 0,
+        y: 0,
+        scaleX: 0.8,
+        scaleY: 0.8,
+        rotate: 0,
+        flip: false,
+      },
+    ]);
+    setEditingId(currId);
+    setCurrId(currId + 1);
+  };
+
   //Select Icon Dialog
   const [openDialog, setOpenDialog] = useState(false);
   const handleClickOpenDialog = () => setOpenDialog(true);
@@ -116,29 +140,52 @@ function App() {
         >
           <div className="container">
             <div className="section" id="circuit-edit-section">
-              <h3>Base</h3>
+              <h4>Base</h4>
               <BaseList
                 bases={items.filter((item) => item.type == "base")}
                 editingId={editingId}
                 handleSetEditingId={setEditingId}
               />
               <div className="section">
+                <AddCircleIcon
+                  fontSize="large"
+                  sx={{
+                    color: "#ccc",
+                    position: "absolute",
+                    left: "-10px",
+                    top: "-8px",
+                  }}
+                />
                 <BaseOptions handleAddBase={handleAddBase} />
               </div>
-              <h3>Circuit</h3>
-              <div className="section">
-                <PatternOptions />
-              </div>
-
+              <h4>Circuit</h4>
               <CircuitList
-                circuits={items.filter((item) => item.type == "circuit")}
+                items={items.filter(
+                  (item) => item.type == "circuit" || item.type == "pattern"
+                )}
                 editingId={editingId}
                 handleSetEditingId={setEditingId}
-                handleClickAddCircuit={handleClickOpenDialog}
               />
-              <h3>Editor</h3>
+              <div className="section">
+                <AddCircleIcon
+                  fontSize="large"
+                  sx={{
+                    color: "#ccc",
+                    position: "absolute",
+                    left: "-10px",
+                    top: "-8px",
+                  }}
+                />
+                <PatternOptions handleAddPattern={handleAddPattern} />
+                <AddMoreCircuitButton
+                  handleClickAddCircuit={handleClickOpenDialog}
+                />
+              </div>
+              <h4>Editor</h4>
               {editingId === -1 ? (
-                <>Select Editing Item First</>
+                <Typography color="text.secondary">
+                  Select item to edit...
+                </Typography>
               ) : (
                 <Editor
                   editingId={editingId}
@@ -159,7 +206,9 @@ function App() {
               <h3>Result</h3>
               <Canvas
                 bases={items.filter((item) => item.type == "base")}
-                circuits={items.filter((item) => item.type == "circuit")}
+                circuits={items.filter(
+                  (item) => item.type == "circuit" || item.type == "pattern"
+                )}
                 editingId={editingId}
               />
               <div className="button">

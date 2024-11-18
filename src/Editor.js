@@ -63,7 +63,7 @@ export function Editor({ editingId, editingItem, handleEdit, handleDelete }) {
           <DeleteIcon />
         </IconButton>
       </div>
-      <h4 className="edior-title">Position</h4>
+      <h5 className="edior-title">Position</h5>
       <div className="slider-section">
         <div className="slider slider-x">
           <InputSlider InputName="X" value={x} setValue={setX} />
@@ -72,7 +72,7 @@ export function Editor({ editingId, editingItem, handleEdit, handleDelete }) {
           <InputSlider InputName="Y" value={y} setValue={setY} />
         </div>
       </div>
-      <h4 className="edior-title">
+      <h5 className="edior-title">
         Scale
         <ToggleButton
           size="small"
@@ -92,7 +92,7 @@ export function Editor({ editingId, editingItem, handleEdit, handleDelete }) {
         >
           <FlipIcon />
         </ToggleButton>
-      </h4>
+      </h5>
 
       <div className="slider-section">
         <div className="slider slider-x">
@@ -117,7 +117,7 @@ export function Editor({ editingId, editingItem, handleEdit, handleDelete }) {
           />
         </div>
       </div>
-      <h4 className="edior-title">Rotate</h4>
+      <h5 className="edior-title">Rotate</h5>
       <div className="slider">
         <InputSlider
           InputName=""

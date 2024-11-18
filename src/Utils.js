@@ -34,7 +34,7 @@ const patterns = {
   pattern_tree: PatternTreeSvg,
 };
 
-export const PatternResolver = ({ patternName, ...props }) => {
+export const PatternResolver = ({ patternName, color, ...props }) => {
   const PatternComponent = patterns[patternName];
 
   if (!PatternComponent) {
@@ -42,7 +42,19 @@ export const PatternResolver = ({ patternName, ...props }) => {
     return null; // You can return a default icon or an empty element here
   }
 
-  return <PatternComponent {...props} />;
+  return (
+    <PatternComponent
+      style={{
+        fill:
+          color == "primary"
+            ? "rgba(25, 118, 210, 1)"
+            : color == "defalut"
+            ? "rgba(0, 0, 0, 0.54)"
+            : color,
+      }}
+      {...props}
+    />
+  );
 };
 
 export const IconResolver = ({ iconName, ...props }) => {
