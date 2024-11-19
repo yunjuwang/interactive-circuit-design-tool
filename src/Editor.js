@@ -57,21 +57,16 @@ export function Editor({ editingId, editingItem, handleEdit, handleDelete }) {
   }
 
   return (
-    <div className="section">
+    <>
       <div className="edior-delete-btn">
         <IconButton onClick={handleDelete}>
           <DeleteIcon />
         </IconButton>
       </div>
       <h5 className="edior-title">Position</h5>
-      <div className="slider-section">
-        <div className="slider slider-x">
-          <InputSlider InputName="X" value={x} setValue={setX} />
-        </div>
-        <div className="slider">
-          <InputSlider InputName="Y" value={y} setValue={setY} />
-        </div>
-      </div>
+      <InputSlider InputName="X" value={x} setValue={setX} />
+      <InputSlider InputName="Y" value={y} setValue={setY} />
+
       <h5 className="edior-title">
         Scale
         <ToggleButton
@@ -94,39 +89,32 @@ export function Editor({ editingId, editingItem, handleEdit, handleDelete }) {
         </ToggleButton>
       </h5>
 
-      <div className="slider-section">
-        <div className="slider slider-x">
-          <InputSlider
-            InputName="X"
-            value={scaleX}
-            setValue={lockScale ? SetScaleX_locked : setScaleX}
-            minValue={0.01}
-            maxValue={1}
-            step={0.01}
-          />
-        </div>
-        <div className="slider">
-          <InputSlider
-            className="slider"
-            InputName="Y"
-            value={scaleY}
-            setValue={lockScale ? SetScaleY_locked : setScaleY}
-            minValue={0.01}
-            maxValue={1}
-            step={0.01}
-          />
-        </div>
-      </div>
+      <InputSlider
+        InputName="X"
+        value={scaleX}
+        setValue={lockScale ? SetScaleX_locked : setScaleX}
+        minValue={0.01}
+        maxValue={1}
+        step={0.01}
+      />
+      <InputSlider
+        className="slider"
+        InputName="Y"
+        value={scaleY}
+        setValue={lockScale ? SetScaleY_locked : setScaleY}
+        minValue={0.01}
+        maxValue={1}
+        step={0.01}
+      />
+
       <h5 className="edior-title">Rotate</h5>
-      <div className="slider">
-        <InputSlider
-          InputName=""
-          value={rotate}
-          setValue={setRotate}
-          minValue={-360}
-          maxValue={360}
-        />
-      </div>
-    </div>
+      <InputSlider
+        InputName=""
+        value={rotate}
+        setValue={setRotate}
+        minValue={-360}
+        maxValue={360}
+      />
+    </>
   );
 }

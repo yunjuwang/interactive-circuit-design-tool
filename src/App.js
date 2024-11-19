@@ -1,15 +1,15 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 
 import Header from "./Header";
 import Canvas from "./Canvas";
 import SearchIconsDialog from "./Dialog.js";
 import { InputSelect, OutputSelect } from "./SystemIO.js";
 import { BaseOptions, BaseList } from "./Base.js";
-import { CircuitList, AddMoreCircuitButton } from "./Circuit.js";
+import { CircuitList, PatternOptions } from "./Circuit.js";
 import { Editor } from "./Editor.js";
-import { PatternOptions } from "./Pattern.js";
 import { ExportButton } from "./Export.js";
 import { Instruction, Step, GetWireColor } from "./Instruction.js";
 import { LaserCutImg, DrawCircuitImg } from "./Image.js";
@@ -139,13 +139,9 @@ function App() {
           desc="Design your circuit and export!"
         >
           <div className="container">
-            <div className="section" id="circuit-edit-section">
-              <h4>Base</h4>
-              <BaseList
-                bases={items.filter((item) => item.type == "base")}
-                editingId={editingId}
-                handleSetEditingId={setEditingId}
-              />
+            <div className="section" id="circuit-select-section">
+              <h4>Add Base</h4>
+
               <div className="section">
                 <AddCircleIcon
                   fontSize="large"
@@ -158,14 +154,8 @@ function App() {
                 />
                 <BaseOptions handleAddBase={handleAddBase} />
               </div>
-              <h4>Circuit</h4>
-              <CircuitList
-                items={items.filter(
-                  (item) => item.type == "circuit" || item.type == "pattern"
-                )}
-                editingId={editingId}
-                handleSetEditingId={setEditingId}
-              />
+              <h4>Add Circuit</h4>
+
               <div className="section">
                 <AddCircleIcon
                   fontSize="large"
@@ -176,12 +166,34 @@ function App() {
                     top: "-8px",
                   }}
                 />
-                <PatternOptions handleAddPattern={handleAddPattern} />
-                <AddMoreCircuitButton
+                <PatternOptions
+                  handleAddPattern={handleAddPattern}
                   handleClickAddCircuit={handleClickOpenDialog}
                 />
               </div>
+              <SearchIconsDialog
+                open={openDialog}
+                handleClose={handleCloseDialog}
+                handleSelect={handleClickSelect}
+              />
+            </div>
+            <div className="section" id="circuit-edit-section">
               <h4>Editor</h4>
+              <div className="section">
+                <BaseList
+                  bases={items.filter((item) => item.type == "base")}
+                  editingId={editingId}
+                  handleSetEditingId={setEditingId}
+                />
+                <Divider sx={{ margin: "8px -5px" }} />
+                <CircuitList
+                  items={items.filter(
+                    (item) => item.type == "circuit" || item.type == "pattern"
+                  )}
+                  editingId={editingId}
+                  handleSetEditingId={setEditingId}
+                />
+              </div>
               {editingId === -1 ? (
                 <Typography color="text.secondary">
                   Select item to edit...
@@ -196,14 +208,8 @@ function App() {
                   handleDelete={() => handleRemoveItem(editingId)}
                 />
               )}
-              <SearchIconsDialog
-                open={openDialog}
-                handleClose={handleCloseDialog}
-                handleSelect={handleClickSelect}
-              />
             </div>
             <div className="section" id="circuit-result-section">
-              <h3>Result</h3>
               <Canvas
                 bases={items.filter((item) => item.type == "base")}
                 circuits={items.filter(
@@ -222,7 +228,7 @@ function App() {
           title="Laser Cut"
           desc={
             <>
-              Cut the <b style={{ color: "red" }}>RED</b> lines and Engrave the{" "}
+              Cut the <b style={{ color: "red" }}>RED</b> lines and engrave the{" "}
               <b style={{ color: "black" }}>BLACK</b> parts
             </>
           }
@@ -232,7 +238,7 @@ function App() {
         <Step
           step={4}
           title="3D pen & Conductive Filament"
-          desc={"Trace over the engraved sections"}
+          desc={"Trace over the engraved parts"}
         >
           <DrawCircuitImg />
         </Step>

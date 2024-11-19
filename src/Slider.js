@@ -5,7 +5,8 @@ import Slider from "@mui/material/Slider";
 import MuiInput from "@mui/material/Input";
 
 const Input = styled(MuiInput)`
-  width: 48px;
+  width: 40px;
+  font-size: 12.5px;
 `;
 
 export function InputSlider({
@@ -33,9 +34,11 @@ export function InputSlider({
   };
 
   return (
-    <Box sx={{ minWidth: 200 }}>
+    <Box sx={{ minWidth: 160 }}>
       <Grid container spacing={2} sx={{ alignItems: "center" }}>
-        <Grid item>{InputName}</Grid>
+        <Grid item sx={{ fontSize: "13px" }}>
+          {InputName}
+        </Grid>
         <Grid item xs>
           <Slider
             value={typeof value === "number" ? value : 0}

@@ -29,8 +29,8 @@ body {
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 10px;
-  margin: 15px;
-  padding: 10px 28px;
+  margin: 10px;
+  padding: 10px 25px;
 }
 #setting-section {
   min-width: 380px;
@@ -40,17 +40,22 @@ body {
   margin-bottom: 10px;
 }
 
-#circuit-edit-section {
+#circuit-select-section {
   /* flex: 3; */
-  flex: 1 0 300px;
-  min-width: 450px;
+  flex: 1 0 200px;
+  min-width: 245px;
   margin-left: 0;
+}
+#circuit-edit-section {
+  flex: 1 0 100px;
+  min-width: 190px;
 }
 #circuit-result-section {
   /* flex: 4; */
   flex: 1 0 500px;
 }
 
+#circuit-select-section > *,
 #circuit-edit-section > *,
 #circuit-result-section > * {
   margin: 10px 0px;
@@ -64,6 +69,7 @@ body {
   width: 500px;
   height: 500px;
   margin: 0 auto;
+  margin-top: 15px;
 }
 
 #circuit-list {
@@ -76,8 +82,8 @@ body {
 }
 .edior-delete-btn {
   position: absolute;
-  right: 16px;
-  top: 8px;
+  right: 18px;
+  top: 2px;
 }
 
 .button {
@@ -89,57 +95,3 @@ body {
   margin-top: 10px;
   margin-bottom: 20px;
 }
-
-.float-right {
-  float: right;
-}
-
-.slider-section {
-  display: flex;
-}
-.slider {
-  flex: 1 1 300px;
-  max-width: 300px;
-}
-.slider-x {
-  margin-right: 10px;
-}
-
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
