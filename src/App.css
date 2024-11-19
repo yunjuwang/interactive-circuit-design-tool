@@ -95,3 +95,19 @@ body {
   margin-top: 10px;
   margin-bottom: 20px;
 }
+
+.target {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+
+  top: 0;
+  left: 0;
+  /* line-height: 100px;
+  text-align: center;
+  background: #ee8;
+  color: #333;
+  font-weight: bold;
+  border: 1px solid #333; */
+  box-sizing: border-box;
+}

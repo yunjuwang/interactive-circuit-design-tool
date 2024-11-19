@@ -1,7 +1,10 @@
 import { IconResolver, PatternResolver } from "./Utils.js";
+import { useRef } from "react";
+import Moveable from "react-moveable";
 
-const DrawBase = ({
-  shape = "Circle",
+function Draw({
+  type,
+  shape,
   x = 0,
   y = 0,
   scaleX = 1,
@@ -9,83 +12,82 @@ const DrawBase = ({
   rotate = 0,
   flip = false,
   editing = false,
-}) => {
-  return (
-    <IconResolver
-      iconName={shape}
-      transform={`translate(${x} ${y}) scale(${
-        flip ? -scaleX : scaleX
-      } ${scaleY}) rotate(${rotate})`}
-      sx={{
-        position: "absolute",
-        fontSize: 500,
-        stroke: editing ? "rgba(25, 118, 210, 1)" : "#ff0000",
-        strokeWidth: "0.1px",
-        fill: "none",
-      }}
-    />
-  );
-};
+}) {
+  const baseStyle = {
+    position: "absolute",
+    fontSize: 500,
+    stroke: editing ? "rgba(25, 118, 210, 1)" : "#ff0000",
+    strokeWidth: "0.1px",
+    fill: "none",
+  };
+  const circuitStyle = {
+    position: "absolute",
+    fontSize: 500,
+    stroke: "#000",
+    strokeWidth: "0.1px",
+    fill: editing ? "rgba(25, 118, 210, 0.3)" : "rgba(0, 0, 0, 0.2)",
+  };
+  const patternStyle = {
+    position: "absolute",
+    stroke: "#000",
+    strokeWidth: "0.1px",
+    fill: editing ? "rgba(25, 118, 210, 0.3)" : "rgba(0, 0, 0, 0.2)",
+  };
+  const targetRef = useRef(null);
 
-const DrawCircuit = ({
-  shape = "Circle",
-  x = 0,
-  y = 0,
-  scaleX = 0.5,
-  scaleY = 0.5,
-  rotate = 0,
-  flip = false,
-  editing = false,
-}) => {
   return (
-    <IconResolver
-      iconName={shape}
-      transform={`translate(${x} ${y}) rotate(${rotate}) scale(${
-        flip ? -scaleX : scaleX
-      } ${scaleY}) `}
-      sx={{
-        position: "absolute",
-        fontSize: 500,
-        stroke: "#000",
-        strokeWidth: "0.1px",
-        fill: editing ? "rgba(25, 118, 210, 0.3)" : "rgba(0, 0, 0, 0.2)",
-      }}
-    />
+    <>
+      {type == "base" || type == "circuit" ? (
+        <IconResolver
+          iconName={shape}
+          className="target"
+          targetRef={targetRef}
+          transform={`translate(${x} ${y}) scale(${
+            flip ? -scaleX : scaleX
+          } ${scaleY}) rotate(${rotate})`}
+          sx={
+            type == "base"
+              ? baseStyle
+              : type == "circuit"
+              ? circuitStyle
+              : undefined
+          }
+        />
+      ) : (
+        <PatternResolver
+          patternName={shape}
+          className="target"
+          targetRef={targetRef}
+          transform={`translate(${x} ${y}) rotate(${rotate}) scale(${
+            flip ? -scaleX : scaleX
+          } ${scaleY}) `}
+          style={patternStyle}
+        />
+      )}
+      {editing ? (
+        <Moveable
+          target={targetRef}
+          draggable={true}
+          rotatable={true}
+          scalable={true}
+          onRender={(e) => {
+            // e.target.style.cssText += e.cssText;
+            e.target.style.transform = e.transform;
+            console.log(e.transform);
+          }}
+        ></Moveable>
+      ) : undefined}
+    </>
   );
-};
-
-const DrawPattern = ({
-  shape = "pattern_corner_1",
-  x = 0,
-  y = 0,
-  scaleX = 1,
-  scaleY = 1,
-  rotate = 0,
-  flip = false,
-  editing = false,
-}) => {
-  return (
-    <PatternResolver
-      patternName={shape}
-      transform={`translate(${x} ${y}) rotate(${rotate}) scale(${
-        flip ? -scaleX : scaleX
-      } ${scaleY}) `}
-      style={{
-        position: "absolute",
-        stroke: "#000",
-        strokeWidth: "0.1px",
-        fill: editing ? "rgba(25, 118, 210, 0.3)" : "rgba(0, 0, 0, 0.2)",
-      }}
-    />
-  );
-};
+}
 
 export default function Canvas({ bases, circuits, editingId }) {
   return (
     <div id="canvas">
-      {bases.map((base) => (
-        <DrawBase
+      {bases.concat(circuits).map((base) => (
+        <Draw
           key={base.id}
+          type={base.type}
           shape={base.shape}
           x={base.x}
           y={base.y}
@@ -96,34 +98,6 @@ export default function Canvas({ bases, circuits, editingId }) {
           editing={base.id == editingId}
         />
       ))}
-
-      {circuits.map((item) =>
-        item.type == "circuit" ? (
-          <DrawCircuit
-            key={item.id}
-            shape={item.shape}
-            x={item.x}
-            y={item.y}
-            scaleX={item.scaleX}
-            scaleY={item.scaleY}
-            rotate={item.rotate}
-            flip={item.flip}
-            editing={item.id == editingId}
-          />
-        ) : item.type == "pattern" ? (
-          <DrawPattern
-            key={item.id}
-            shape={item.shape}
-            x={item.x}
-            y={item.y}
-            scaleX={item.scaleX}
-            scaleY={item.scaleY}
-            rotate={item.rotate}
-            flip={item.flip}
-            editing={item.id == editingId}
-          />
-        ) : undefined
-      )}
     </div>
   );
 }

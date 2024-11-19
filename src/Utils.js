@@ -34,7 +34,12 @@ const patterns = {
   pattern_tree: PatternTreeSvg,
 };
 
-export const PatternResolver = ({ patternName, color, ...props }) => {
+export const PatternResolver = ({
+  patternName,
+  targetRef,
+  color,
+  ...props
+}) => {
   const PatternComponent = patterns[patternName];
 
   if (!PatternComponent) {
@@ -44,6 +49,7 @@ export const PatternResolver = ({ patternName, color, ...props }) => {
 
   return (
     <PatternComponent
+      ref={targetRef}
       style={{
         fill:
           color == "primary"
@@ -57,7 +63,7 @@ export const PatternResolver = ({ patternName, color, ...props }) => {
   );
 };
 
-export const IconResolver = ({ iconName, ...props }) => {
+export const IconResolver = ({ iconName, targetRef, ...props }) => {
   const IconComponent = MuiIcons[iconName];
 
   if (!IconComponent) {
@@ -65,5 +71,5 @@ export const IconResolver = ({ iconName, ...props }) => {
     return null; // You can return a default icon or an empty element here
   }
 
-  return <IconComponent {...props} />;
+  return <IconComponent ref={targetRef} {...props} />;
 };
