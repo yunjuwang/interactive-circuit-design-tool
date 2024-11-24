@@ -1,5 +1,5 @@
 import { IconResolver, PatternResolver } from "./Utils.js";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Moveable from "react-moveable";
 
 function Draw({
@@ -33,15 +33,19 @@ function Draw({
     strokeWidth: "0.1px",
     fill: editing ? "rgba(25, 118, 210, 0.3)" : "rgba(0, 0, 0, 0.2)",
   };
-  const targetRef = useRef(null);
+
+  const moveableRef = useRef(null);
+
+  useEffect(() => {
+    moveableRef.current?.updateRect();
+  }, [x, y, scaleX, scaleY, rotate]);
 
   return (
     <>
       {type == "base" || type == "circuit" ? (
         <IconResolver
           iconName={shape}
-          className="target"
-          targetRef={targetRef}
+          className={editing ? "target" : undefined}
           transform={`translate(${x} ${y}) scale(${
             flip ? -scaleX : scaleX
           } ${scaleY}) rotate(${rotate})`}
@@ -56,8 +60,7 @@ function Draw({
       ) : (
         <PatternResolver
           patternName={shape}
-          className="target"
-          targetRef={targetRef}
+          className={editing ? "target" : undefined}
           transform={`translate(${x} ${y}) rotate(${rotate}) scale(${
             flip ? -scaleX : scaleX
           } ${scaleY}) `}
@@ -66,7 +69,8 @@ function Draw({
       )}
       {editing ? (
         <Moveable
-          target={targetRef}
+          ref={moveableRef}
+          target={".target"}
           draggable={true}
           rotatable={true}
           scalable={true}
