@@ -88,18 +88,18 @@ export default function Canvas({ bases, circuits, editingId }) {
         .concat(circuits)
         // draw editing item last so it can be edited
         .sort((x, y) => (x.id == editingId ? 1 : y.id == editingId ? -1 : 0))
-        .map((base) => (
+        .map((item) => (
           <Draw
-            key={base.id}
-            type={base.type}
-            shape={base.shape}
-            x={base.x}
-            y={base.y}
-            scaleX={base.scaleX}
-            scaleY={base.scaleY}
-            rotate={base.rotate}
-            flip={base.flip}
-            editing={base.id == editingId}
+            key={item.id}
+            type={item.type}
+            shape={item.shape}
+            x={item.x}
+            y={item.y}
+            scaleX={item.scaleX}
+            scaleY={item.scaleY}
+            rotate={item.rotate}
+            flip={item.flip}
+            editing={item.id == editingId}
           />
         ))}
     </div>
