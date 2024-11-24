@@ -34,7 +34,6 @@ export function Editor({ editingId, editingItem, handleEdit, handleDelete }) {
       id: editingId,
       type: editingItem.type,
       shape: editingItem.shape,
-      size: 300,
       x: x,
       y: y,
       scaleX: scaleX,
