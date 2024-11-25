@@ -2,9 +2,10 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
-
 import Header from "./Header";
 import Canvas from "./Canvas";
+import Button from "@mui/material/Button";
+
 import SearchIconsDialog from "./Dialog.js";
 import { InputSelect, OutputSelect } from "./SystemIO.js";
 import { BaseOptions, BaseList } from "./Base.js";
@@ -222,28 +223,37 @@ function App() {
                   Select item to edit...
                 </Typography>
               ) : (
-                <Editor
-                  editingId={editingId}
-                  editingItem={editingItem}
-                  handleEdit={(newItem) =>
-                    handleEditItem(editingItem.id, newItem)
-                  }
-                  handleDelete={() => handleRemoveItem(editingId)}
-                  x={x}
-                  setX={setX}
-                  y={y}
-                  setY={setY}
-                  scaleX={scaleX}
-                  setScaleX={setScaleX}
-                  scaleY={scaleY}
-                  setScaleY={setScaleY}
-                  rotate={rotate}
-                  setRotate={setRotate}
-                  lockScale={lockScale}
-                  setLockScale={setLockScale}
-                  flip={flip}
-                  setFlip={setFlip}
-                />
+                <>
+                  <Editor
+                    editingId={editingId}
+                    editingItem={editingItem}
+                    handleEdit={(newItem) =>
+                      handleEditItem(editingItem.id, newItem)
+                    }
+                    handleDelete={() => handleRemoveItem(editingId)}
+                    x={x}
+                    setX={setX}
+                    y={y}
+                    setY={setY}
+                    scaleX={scaleX}
+                    setScaleX={setScaleX}
+                    scaleY={scaleY}
+                    setScaleY={setScaleY}
+                    rotate={rotate}
+                    setRotate={setRotate}
+                    lockScale={lockScale}
+                    setLockScale={setLockScale}
+                    flip={flip}
+                    setFlip={setFlip}
+                  />
+                  <Button
+                    className="button"
+                    variant="outlined"
+                    onClick={() => setEditingId(-1)}
+                  >
+                    Deselect
+                  </Button>
+                </>
               )}
             </div>
             <div className="section" id="circuit-result-section">
@@ -260,9 +270,7 @@ function App() {
                 setRotate={setRotate}
                 lockScale={lockScale}
               />
-              <div className="button">
-                <ExportButton />
-              </div>
+              <ExportButton />
             </div>
           </div>
         </Step>
