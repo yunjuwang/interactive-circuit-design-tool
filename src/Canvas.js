@@ -1,6 +1,7 @@
 import { IconResolver, PatternResolver } from "./Utils.js";
 import { useRef, useEffect } from "react";
 import Moveable from "react-moveable";
+import { flushSync } from "react-dom";
 
 function Draw({
   type,
@@ -12,6 +13,12 @@ function Draw({
   rotate = 0,
   flip = false,
   editing = false,
+  setX,
+  setY,
+  setScaleX,
+  setScaleY,
+  setRotate,
+  lockScale,
 }) {
   const baseStyle = {
     position: "absolute",
@@ -69,14 +76,28 @@ function Draw({
       )}
       {editing ? (
         <Moveable
+          flushSync={flushSync}
           ref={moveableRef}
           target={".target"}
           draggable={true}
           rotatable={true}
           scalable={true}
+          keepRatio={lockScale}
+          onDrag={(e) => {
+            setX(parseInt(e.translate[0]));
+            setY(parseInt(e.translate[1]));
+          }}
+          onScale={(e) => {
+            const newX = parseFloat((scaleX * e.scale[0]).toFixed(2));
+            const newY = parseFloat((scaleY * e.scale[1]).toFixed(2));
+
+            setScaleX(newX);
+            setScaleY(newY);
+          }}
+          onRotate={(e) => {
+            setRotate(parseInt(e.rotation));
+          }}
           onRender={(e) => {
-            // e.target.style.cssText += e.cssText;
-            e.target.style.transform = e.transform;
             console.log(e.transform);
           }}
         ></Moveable>
@@ -85,7 +106,17 @@ function Draw({
   );
 }
 
-export default function Canvas({ bases, circuits, editingId }) {
+export default function Canvas({
+  bases,
+  circuits,
+  editingId,
+  setX,
+  setY,
+  setScaleX,
+  setScaleY,
+  setRotate,
+  lockScale,
+}) {
   return (
     <div id="canvas">
       {bases
@@ -104,6 +135,12 @@ export default function Canvas({ bases, circuits, editingId }) {
             rotate={item.rotate}
             flip={item.flip}
             editing={item.id == editingId}
+            setX={setX}
+            setY={setY}
+            setScaleX={setScaleX}
+            setScaleY={setScaleY}
+            setRotate={setRotate}
+            lockScale={lockScale}
           />
         ))}
     </div>

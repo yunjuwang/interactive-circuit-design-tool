@@ -7,15 +7,26 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import LockIcon from "@mui/icons-material/Lock";
 import FlipIcon from "@mui/icons-material/Flip";
 
-export function Editor({ editingId, editingItem, handleEdit, handleDelete }) {
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
-  const [scaleX, setScaleX] = useState(0.5);
-  const [scaleY, setScaleY] = useState(0.5);
-  const [rotate, setRotate] = useState(0);
-  const [lockScale, setLockScale] = useState(true);
-  const [flip, setFlip] = useState(false);
-
+export function Editor({
+  editingId,
+  editingItem,
+  handleEdit,
+  handleDelete,
+  x,
+  setX,
+  y,
+  setY,
+  scaleX,
+  setScaleX,
+  scaleY,
+  setScaleY,
+  rotate,
+  setRotate,
+  lockScale,
+  setLockScale,
+  flip,
+  setFlip,
+}) {
   useEffect(() => {
     if (editingId === -1 || editingItem === undefined) return;
 
@@ -26,23 +37,6 @@ export function Editor({ editingId, editingItem, handleEdit, handleDelete }) {
     setRotate(editingItem.rotate);
     setFlip(editingItem.flip);
   }, [editingItem]);
-
-  useEffect(() => {
-    if (editingId === -1 || editingItem === undefined) return;
-
-    const newItem = {
-      id: editingId,
-      type: editingItem.type,
-      shape: editingItem.shape,
-      x: x,
-      y: y,
-      scaleX: scaleX,
-      scaleY: scaleY,
-      rotate: rotate,
-      flip: flip,
-    };
-    handleEdit(newItem);
-  }, [x, y, scaleX, scaleY, rotate, flip]);
 
   function SetScaleX_locked(scale) {
     const diff = scale - scaleX;
@@ -93,7 +87,7 @@ export function Editor({ editingId, editingItem, handleEdit, handleDelete }) {
         value={scaleX}
         setValue={lockScale ? SetScaleX_locked : setScaleX}
         minValue={0.01}
-        maxValue={1}
+        maxValue={1.0}
         step={0.01}
       />
       <InputSlider
@@ -102,7 +96,7 @@ export function Editor({ editingId, editingItem, handleEdit, handleDelete }) {
         value={scaleY}
         setValue={lockScale ? SetScaleY_locked : setScaleY}
         minValue={0.01}
-        maxValue={1}
+        maxValue={1.0}
         step={0.01}
       />
 

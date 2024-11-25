@@ -42,6 +42,32 @@ function App() {
     setItems(items.map((item) => (item.id == editId ? newItem : item)));
   };
 
+  // Editing item properties (for editor & moveable)
+  const [x, setX] = useState(0);
+  const [y, setY] = useState(0);
+  const [scaleX, setScaleX] = useState(1);
+  const [scaleY, setScaleY] = useState(1);
+  const [rotate, setRotate] = useState(0);
+  const [lockScale, setLockScale] = useState(true);
+  const [flip, setFlip] = useState(false);
+
+  useEffect(() => {
+    if (editingId === -1 || editingItem === undefined) return;
+
+    const newItem = {
+      id: editingId,
+      type: editingItem.type,
+      shape: editingItem.shape,
+      x: x,
+      y: y,
+      scaleX: scaleX,
+      scaleY: scaleY,
+      rotate: rotate,
+      flip: flip,
+    };
+    handleEditItem(editingId, newItem);
+  }, [x, y, scaleX, scaleY, rotate, flip]);
+
   // Base
   const handleAddBase = (selectedIcon) => {
     setItems([
@@ -203,6 +229,20 @@ function App() {
                     handleEditItem(editingItem.id, newItem)
                   }
                   handleDelete={() => handleRemoveItem(editingId)}
+                  x={x}
+                  setX={setX}
+                  y={y}
+                  setY={setY}
+                  scaleX={scaleX}
+                  setScaleX={setScaleX}
+                  scaleY={scaleY}
+                  setScaleY={setScaleY}
+                  rotate={rotate}
+                  setRotate={setRotate}
+                  lockScale={lockScale}
+                  setLockScale={setLockScale}
+                  flip={flip}
+                  setFlip={setFlip}
                 />
               )}
             </div>
@@ -213,6 +253,12 @@ function App() {
                   (item) => item.type == "circuit" || item.type == "pattern"
                 )}
                 editingId={editingId}
+                setX={setX}
+                setY={setY}
+                setScaleX={setScaleX}
+                setScaleY={setScaleY}
+                setRotate={setRotate}
+                lockScale={lockScale}
               />
               <div className="button">
                 <ExportButton />
