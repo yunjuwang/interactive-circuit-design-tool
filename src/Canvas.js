@@ -3,6 +3,34 @@ import { useRef, useEffect } from "react";
 import Moveable from "react-moveable";
 import { flushSync } from "react-dom";
 
+function DrawScaleRuler({ maxValue = 50 }) {
+  let scales = [];
+  let text = [];
+  for (let i = 0; i <= maxValue; i++) {
+    if (i % 10 == 0) {
+      scales.push(<li></li>);
+      text.push(<span>{i / 10}</span>);
+    } else {
+      scales.push(<li> </li>);
+    }
+  }
+
+  return (
+    <>
+      <div className="ruler-container">
+        <ul className="ruler">{scales}</ul>
+        <ul className="ruler-text">{text}</ul>
+      </div>
+      <div className="ruler-container">
+        <ul className="ruler-text vertical">{text}</ul>
+      </div>
+      <div className="ruler-container">
+        <ul className="ruler vertical">{scales}</ul>
+      </div>
+    </>
+  );
+}
+
 function Draw({
   type,
   shape,
@@ -119,6 +147,7 @@ export default function Canvas({
 }) {
   return (
     <div id="canvas">
+      <DrawScaleRuler />
       {bases
         .concat(circuits)
         // draw editing item last so it can be edited
