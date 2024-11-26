@@ -131,7 +131,10 @@ function App() {
 
   //Select Icon Dialog
   const [openDialog, setOpenDialog] = useState(false);
-  const handleClickOpenDialog = () => setOpenDialog(true);
+  const handleClickOpenDialog = () => {
+    setEditingId(-1);
+    setOpenDialog(true);
+  };
   const handleCloseDialog = () => setOpenDialog(false);
   const handleClickSelect = (selectedIcon) => {
     handleAddCircuit(selectedIcon);
