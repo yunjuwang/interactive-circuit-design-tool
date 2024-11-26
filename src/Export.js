@@ -46,8 +46,10 @@ function GenerateSvgFromCanvas(canvas) {
 
   for (let i = 0; i < svgNodes.length; i++) {
     const svgNode = svgNodes[i];
-    const svgStyle = window.getComputedStyle(svgNode);
 
+    if (svgNode.nodeName != "svg") continue;
+
+    const svgStyle = window.getComputedStyle(svgNode);
     let svgTransform = svgNode.getAttribute("transform");
 
     const scale = svgTransform.match(/scale\(([-\d.]+) ([-\d.]+)\)/);
