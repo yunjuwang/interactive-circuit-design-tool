@@ -16,6 +16,7 @@ export function InputSlider({
   minValue = -200,
   maxValue = 200,
   step = 1,
+  sx,
 }) {
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
@@ -34,7 +35,7 @@ export function InputSlider({
   };
 
   return (
-    <Box sx={{ minWidth: 160 }}>
+    <Box sx={{ minWidth: 160, ...sx }}>
       <Grid container spacing={2} sx={{ alignItems: "center" }}>
         <Grid item sx={{ fontSize: "13px" }}>
           {InputName}

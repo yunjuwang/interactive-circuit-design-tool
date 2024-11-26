@@ -2,14 +2,35 @@ import { IconResolver, PatternResolver } from "./Utils.js";
 import { useRef, useEffect } from "react";
 import Moveable from "react-moveable";
 import { flushSync } from "react-dom";
+import { InputSlider } from "./Slider.js";
 
-function DrawScaleRuler({ maxValue = 50 }) {
+export function CanvasScaleSlider({ canvasScale, setCanvasScale }) {
+  return (
+    <InputSlider
+      InputName="Canvas Scale(cm) :"
+      value={canvasScale}
+      setValue={setCanvasScale}
+      minValue={3}
+      maxValue={20}
+      sx={{
+        minWidth: "300px",
+        position: "absolute",
+        left: "68px",
+        bottom: "8px",
+      }}
+    />
+  );
+}
+
+function DrawScaleRuler({ canvasScale = 5 }) {
   let scales = [];
-  let text = [];
-  for (let i = 0; i <= maxValue; i++) {
+  for (let i = 0; i <= canvasScale * 10; i++) {
     if (i % 10 == 0) {
-      scales.push(<li></li>);
-      text.push(<span>{i / 10}</span>);
+      scales.push(
+        <li>
+          <span>{i / 10}</span>
+        </li>
+      );
     } else {
       scales.push(<li> </li>);
     }
@@ -19,10 +40,6 @@ function DrawScaleRuler({ maxValue = 50 }) {
     <>
       <div className="ruler-container">
         <ul className="ruler">{scales}</ul>
-        <ul className="ruler-text">{text}</ul>
-      </div>
-      <div className="ruler-container">
-        <ul className="ruler-text vertical">{text}</ul>
       </div>
       <div className="ruler-container">
         <ul className="ruler vertical">{scales}</ul>
@@ -134,7 +151,7 @@ function Draw({
   );
 }
 
-export default function Canvas({
+export function Canvas({
   bases,
   circuits,
   editingId,
@@ -144,10 +161,11 @@ export default function Canvas({
   setScaleY,
   setRotate,
   lockScale,
+  canvasScale,
 }) {
   return (
     <div id="canvas">
-      <DrawScaleRuler />
+      <DrawScaleRuler canvasScale={canvasScale} />
       {bases
         .concat(circuits)
         // draw editing item last so it can be edited

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import Header from "./Header";
-import Canvas from "./Canvas";
+import { Canvas, CanvasScaleSlider } from "./Canvas";
 import Button from "@mui/material/Button";
 
 import SearchIconsDialog from "./Dialog.js";
@@ -129,7 +129,10 @@ function App() {
     setCurrId(currId + 1);
   };
 
-  //Select Icon Dialog
+  // Canvas Scale
+  const [canvasScale, setCanvasScale] = useState(5);
+
+  // Select Icon Dialog
   const [openDialog, setOpenDialog] = useState(false);
   const handleClickOpenDialog = () => {
     setEditingId(-1);
@@ -272,6 +275,11 @@ function App() {
                 setScaleY={setScaleY}
                 setRotate={setRotate}
                 lockScale={lockScale}
+                canvasScale={canvasScale}
+              />
+              <CanvasScaleSlider
+                canvasScale={canvasScale}
+                setCanvasScale={setCanvasScale}
               />
               <ExportButton />
             </div>

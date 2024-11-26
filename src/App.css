@@ -119,26 +119,23 @@ body {
   position: absolute;
 }
 .ruler,
-.ruler li,
-.ruler-text {
+.ruler li {
   margin: 0;
   padding: 0;
   list-style: none;
   display: inline-block;
 }
-.ruler,
-.ruler-text {
+.ruler {
   color: #ccc;
   white-space: nowrap;
   display: flex;
   justify-content: space-between;
   font-size: 12px;
 }
-.ruler-text {
-  margin: 0 -4px;
-  top: 2px;
-  left: 10px;
-  position: relative;
+.ruler li span {
+  position: absolute;
+  margin-top: -1px;
+  margin-left: 1px;
 }
 .ruler li:before {
   content: "";
@@ -150,7 +147,6 @@ body {
   height: 15px;
 }
 .ruler li:nth-child(10n + 1):before {
-  /* height: 25px; */
   height: 100%;
 }
 .ruler li:first-child:before,
@@ -158,13 +154,9 @@ body {
   height: 0px;
 }
 /* scale ruler vertical */
-.ruler.vertical,
-.ruler-text.vertical {
+.ruler.vertical {
   flex-direction: column;
   height: 100%;
-}
-.ruler-text.vertical {
-  height: 104%;
 }
 .ruler.vertical li:before {
   border-top: 1px solid #eee;
