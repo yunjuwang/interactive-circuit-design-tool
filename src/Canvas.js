@@ -130,9 +130,12 @@ function Draw({
           rotatable={true}
           scalable={true}
           keepRatio={lockScale}
+          onDragStart={(e) => {
+            e.set([x, y]);
+          }}
           onDrag={(e) => {
-            let newX = parseInt(x + e.translate[0]);
-            let newY = parseInt(y + e.translate[1]);
+            let newX = parseInt(e.translate[0]);
+            let newY = parseInt(e.translate[1]);
 
             newX = newX > 200 ? 200 : newX < -200 ? -200 : newX;
             newY = newY > 200 ? 200 : newY < -200 ? -200 : newY;
@@ -140,9 +143,12 @@ function Draw({
             setX(newX);
             setY(newY);
           }}
+          onScaleStart={(e) => {
+            e.set([scaleX, scaleY]);
+          }}
           onScale={(e) => {
-            let newX = parseFloat((scaleX * e.scale[0]).toFixed(2));
-            let newY = parseFloat((scaleY * e.scale[1]).toFixed(2));
+            let newX = parseFloat(e.scale[0].toFixed(2));
+            let newY = parseFloat(e.scale[1].toFixed(2));
 
             newX = newX > 1.0 ? 1.0 : newX < 0.01 ? 0.01 : newX;
             newY = newY > 1.0 ? 1.0 : newY < 0.01 ? 0.01 : newY;
@@ -150,14 +156,18 @@ function Draw({
             setScaleX(newX);
             setScaleY(newY);
           }}
+          onRotateStart={(e) => {
+            e.set(rotate);
+          }}
           onRotate={(e) => {
-            let newRotate = parseInt(rotate + e.rotation);
+            let newRotate = parseInt(e.rotation);
             newRotate =
               newRotate > 360 ? 360 : newRotate < -360 ? -360 : newRotate;
 
             setRotate(newRotate);
           }}
           onRender={(e) => {
+            //e.target.style.transform = e.transform;
             console.log(e.transform);
           }}
         ></Moveable>
