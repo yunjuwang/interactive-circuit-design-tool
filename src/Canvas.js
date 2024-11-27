@@ -11,7 +11,7 @@ export function CanvasScaleSlider({ canvasScale, setCanvasScale }) {
       value={canvasScale}
       setValue={setCanvasScale}
       minValue={3}
-      maxValue={20}
+      maxValue={30}
       sx={{
         minWidth: "300px",
         position: "absolute",
@@ -27,12 +27,12 @@ function DrawScaleRuler({ canvasScale = 5 }) {
   for (let i = 0; i <= canvasScale * 10; i++) {
     if (i % 10 == 0) {
       scales.push(
-        <li>
+        <li key={i}>
           <span>{i / 10}</span>
         </li>
       );
     } else {
-      scales.push(<li> </li>);
+      scales.push(<li key={i}> </li>);
     }
   }
 
@@ -76,13 +76,15 @@ function Draw({
     position: "absolute",
     fontSize: 500,
     stroke: "#000",
-    strokeWidth: "0.1px",
+    // strokeWidth: "0.1px",
+    strokeWidth: "0px",
     fill: editing ? "rgba(25, 118, 210, 0.3)" : "rgba(0, 0, 0, 0.2)",
   };
   const patternStyle = {
     position: "absolute",
     stroke: "#000",
-    strokeWidth: "0.1px",
+    // strokeWidth: "0.1px",
+    strokeWidth: "0px",
     fill: editing ? "rgba(25, 118, 210, 0.3)" : "rgba(0, 0, 0, 0.2)",
   };
 
@@ -129,18 +131,31 @@ function Draw({
           scalable={true}
           keepRatio={lockScale}
           onDrag={(e) => {
-            setX(parseInt(e.translate[0]));
-            setY(parseInt(e.translate[1]));
+            let newX = parseInt(x + e.translate[0]);
+            let newY = parseInt(y + e.translate[1]);
+
+            newX = newX > 200 ? 200 : newX < -200 ? -200 : newX;
+            newY = newY > 200 ? 200 : newY < -200 ? -200 : newY;
+
+            setX(newX);
+            setY(newY);
           }}
           onScale={(e) => {
-            const newX = parseFloat((scaleX * e.scale[0]).toFixed(2));
-            const newY = parseFloat((scaleY * e.scale[1]).toFixed(2));
+            let newX = parseFloat((scaleX * e.scale[0]).toFixed(2));
+            let newY = parseFloat((scaleY * e.scale[1]).toFixed(2));
+
+            newX = newX > 1.0 ? 1.0 : newX < 0.01 ? 0.01 : newX;
+            newY = newY > 1.0 ? 1.0 : newY < 0.01 ? 0.01 : newY;
 
             setScaleX(newX);
             setScaleY(newY);
           }}
           onRotate={(e) => {
-            setRotate(parseInt(e.rotation));
+            let newRotate = parseInt(rotate + e.rotation);
+            newRotate =
+              newRotate > 360 ? 360 : newRotate < -360 ? -360 : newRotate;
+
+            setRotate(newRotate);
           }}
           onRender={(e) => {
             console.log(e.transform);
