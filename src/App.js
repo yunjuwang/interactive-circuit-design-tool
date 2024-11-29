@@ -14,6 +14,7 @@ import { Editor } from "./Editor.js";
 import { ExportButton } from "./Export.js";
 import { Instruction, Step, GetWireColor } from "./Instruction.js";
 import { LaserCutImg, DrawCircuitImg } from "./Image.js";
+import { TemplateButton } from "./Template.js";
 
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
@@ -51,6 +52,9 @@ function App() {
   const [rotate, setRotate] = useState(0);
   const [lockScale, setLockScale] = useState(true);
   const [flip, setFlip] = useState(false);
+
+  // Canvas Scale
+  const [canvasScale, setCanvasScale] = useState(5);
 
   useEffect(() => {
     if (editingId === -1 || editingItem === undefined) return;
@@ -129,9 +133,6 @@ function App() {
     setCurrId(currId + 1);
   };
 
-  // Canvas Scale
-  const [canvasScale, setCanvasScale] = useState(5);
-
   // Select Icon Dialog
   const [openDialog, setOpenDialog] = useState(false);
   const handleClickOpenDialog = () => {
@@ -168,6 +169,14 @@ function App() {
           title="Design Your Circuit"
           desc="Design your circuit and export!"
         >
+          <div className="section">
+            <TemplateButton
+              setItems={setItems}
+              setCurrId={setCurrId}
+              setEditingId={setEditingId}
+              setCanvasScale={setCanvasScale}
+            />
+          </div>
           <div className="container">
             <div className="section" id="circuit-select-section">
               <h4>Add Base</h4>
