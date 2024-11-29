@@ -91,15 +91,19 @@ function Draw({
   const moveableRef = useRef(null);
 
   useEffect(() => {
+    // when control by editor, update svg transform
     const svgComponent = document.querySelector(".target");
     if (svgComponent) {
       svgComponent.setAttribute(
-        "style",
-        `transform: translate(${x}px, ${y}px) scale(${scaleX}, ${scaleY}) rotate(${rotate}deg)`
+        "transform",
+        `translate(${x} ${y}) scale(${
+          flip ? -scaleX : scaleX
+        } ${scaleY}) rotate(${rotate})`
       );
     }
+    // update moveable rect
     moveableRef.current?.updateRect();
-  }, [x, y, scaleX, scaleY, rotate]);
+  }, [x, y, scaleX, scaleY, rotate, flip]);
 
   let newX, newY, newScaleX, newScaleY, newRotate;
 
@@ -109,9 +113,6 @@ function Draw({
         <IconResolver
           iconName={shape}
           className={editing ? "target" : undefined}
-          transform={`translate(${x} ${y}) scale(${
-            flip ? -scaleX : scaleX
-          } ${scaleY}) rotate(${rotate})`}
           sx={
             type == "base"
               ? baseStyle
@@ -124,9 +125,6 @@ function Draw({
         <PatternResolver
           patternName={shape}
           className={editing ? "target" : undefined}
-          transform={`translate(${x} ${y}) rotate(${rotate}) scale(${
-            flip ? -scaleX : scaleX
-          } ${scaleY}) `}
           sx={patternStyle}
         />
       )}
@@ -150,8 +148,10 @@ function Draw({
             newY = newY > 200 ? 200 : newY < -200 ? -200 : newY;
 
             e.target.setAttribute(
-              "style",
-              `transform: translate(${newX}px, ${newY}px) scale(${scaleX}, ${scaleY}) rotate(${rotate}deg)`
+              "transform",
+              `translate(${newX} ${newY}) scale(${
+                flip ? -scaleX : scaleX
+              } ${scaleY}) rotate(${rotate})`
             );
           }}
           onDragEnd={(e) => {
@@ -171,8 +171,10 @@ function Draw({
               newScaleY > 1.0 ? 1.0 : newScaleY < 0.01 ? 0.01 : newScaleY;
 
             e.target.setAttribute(
-              "style",
-              `transform: translate(${x}px, ${y}px) scale(${newScaleX}, ${newScaleY}) rotate(${rotate}deg)`
+              "transform",
+              `translate(${x} ${y}) scale(${
+                flip ? -newScaleX : newScaleX
+              } ${newScaleY}) rotate(${rotate})`
             );
           }}
           onScaleEnd={(e) => {
@@ -188,8 +190,10 @@ function Draw({
               newRotate > 360 ? 360 : newRotate < -360 ? -360 : newRotate;
 
             e.target.setAttribute(
-              "style",
-              `transform: translate(${x}px, ${y}px) scale(${scaleX}, ${scaleY}) rotate(${newRotate}deg)`
+              "transform",
+              `translate(${x} ${y}) scale(${
+                flip ? -scaleX : scaleX
+              } ${scaleY}) rotate(${newRotate})`
             );
           }}
           onRotateEnd={(e) => {
