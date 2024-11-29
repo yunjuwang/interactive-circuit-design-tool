@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { InputSlider } from "./Slider.js";
 import ToggleButton from "@mui/material/ToggleButton";
 import IconButton from "@mui/material/IconButton";
 
 import DeleteIcon from "@mui/icons-material/Delete";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import LockIcon from "@mui/icons-material/Lock";
 import FlipIcon from "@mui/icons-material/Flip";
 
 export function Editor({
   editingId,
   editingItem,
-  handleEdit,
+  handleCopy,
   handleDelete,
   x,
   setX,
@@ -52,6 +53,9 @@ export function Editor({
   return (
     <>
       <div className="edior-delete-btn">
+        <IconButton onClick={handleCopy}>
+          <ContentCopyIcon />
+        </IconButton>
         <IconButton onClick={handleDelete}>
           <DeleteIcon />
         </IconButton>

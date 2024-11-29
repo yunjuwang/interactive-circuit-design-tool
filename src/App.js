@@ -35,6 +35,21 @@ function App() {
     setEditingItem(items.find((item) => item.id == editingId));
   }, [editingId]);
 
+  const handleAddItem = (newItem) => {
+    setItems([
+      ...items, // old items
+      newItem,
+    ]);
+    setEditingId(currId);
+    setCurrId(currId + 1);
+  };
+
+  const handleCopyItem = (copyId) => {
+    const copiedItem = items.find((item) => item.id == copyId);
+    const newItem = { ...copiedItem, id: currId }; // do deep copy
+    handleAddItem(newItem);
+  };
+
   const handleRemoveItem = (removeId) => {
     setItems(items.filter((item) => item.id != removeId));
     setEditingId(-1);
@@ -75,42 +90,34 @@ function App() {
 
   // Base
   const handleAddBase = (selectedIcon) => {
-    setItems([
-      ...items, // old items
-      {
-        id: currId,
-        type: "base",
-        shape: selectedIcon,
-        x: 0,
-        y: 0,
-        scaleX: 1,
-        scaleY: 1,
-        rotate: 0,
-        flip: false,
-      },
-    ]);
-    setEditingId(currId);
-    setCurrId(currId + 1);
+    const newBase = {
+      id: currId,
+      type: "base",
+      shape: selectedIcon,
+      x: 0,
+      y: 0,
+      scaleX: 1,
+      scaleY: 1,
+      rotate: 0,
+      flip: false,
+    };
+    handleAddItem(newBase);
   };
 
   // Circuit
   const handleAddCircuit = (selectedIcon) => {
-    setItems([
-      ...items, // old items
-      {
-        id: currId,
-        type: "circuit",
-        shape: selectedIcon,
-        x: 0,
-        y: 0,
-        scaleX: 0.5,
-        scaleY: 0.5,
-        rotate: 0,
-        flip: false,
-      },
-    ]);
-    setEditingId(currId);
-    setCurrId(currId + 1);
+    const newCircuit = {
+      id: currId,
+      type: "circuit",
+      shape: selectedIcon,
+      x: 0,
+      y: 0,
+      scaleX: 0.5,
+      scaleY: 0.5,
+      rotate: 0,
+      flip: false,
+    };
+    handleAddItem(newCircuit);
   };
 
   // Pattern
@@ -242,9 +249,7 @@ function App() {
                   <Editor
                     editingId={editingId}
                     editingItem={editingItem}
-                    handleEdit={(newItem) =>
-                      handleEditItem(editingItem.id, newItem)
-                    }
+                    handleCopy={() => handleCopyItem(editingId)}
                     handleDelete={() => handleRemoveItem(editingId)}
                     x={x}
                     setX={setX}
