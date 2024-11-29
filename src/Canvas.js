@@ -162,6 +162,12 @@ function Draw({
             e.set([scaleX, scaleY]);
           }}
           onScale={(e) => {
+            newX = parseInt(x + e.drag.translate[0]);
+            newY = parseInt(y + e.drag.translate[1]);
+
+            newX = newX > 200 ? 200 : newX < -200 ? -200 : newX;
+            newY = newY > 200 ? 200 : newY < -200 ? -200 : newY;
+
             newScaleX = parseFloat(e.scale[0].toFixed(2));
             newScaleY = parseFloat(e.scale[1].toFixed(2));
 
@@ -172,12 +178,14 @@ function Draw({
 
             e.target.setAttribute(
               "transform",
-              `translate(${x} ${y}) scale(${
+              `translate(${newX} ${newY}) scale(${
                 flip ? -newScaleX : newScaleX
               } ${newScaleY}) rotate(${rotate})`
             );
           }}
           onScaleEnd={(e) => {
+            setX(newX);
+            setY(newY);
             setScaleX(newScaleX);
             setScaleY(newScaleY);
           }}
