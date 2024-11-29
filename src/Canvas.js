@@ -91,8 +91,17 @@ function Draw({
   const moveableRef = useRef(null);
 
   useEffect(() => {
+    const svgComponent = document.querySelector(".target");
+    if (svgComponent) {
+      svgComponent.setAttribute(
+        "style",
+        `transform: translate(${x}px, ${y}px) scale(${scaleX}, ${scaleY}) rotate(${rotate}deg)`
+      );
+    }
     moveableRef.current?.updateRect();
   }, [x, y, scaleX, scaleY, rotate]);
+
+  let newX, newY, newScaleX, newScaleY, newRotate;
 
   return (
     <>
@@ -118,7 +127,7 @@ function Draw({
           transform={`translate(${x} ${y}) rotate(${rotate}) scale(${
             flip ? -scaleX : scaleX
           } ${scaleY}) `}
-          style={patternStyle}
+          sx={patternStyle}
         />
       )}
       {editing ? (
@@ -134,12 +143,18 @@ function Draw({
             e.set([x, y]);
           }}
           onDrag={(e) => {
-            let newX = parseInt(e.translate[0]);
-            let newY = parseInt(e.translate[1]);
+            newX = parseInt(e.translate[0]);
+            newY = parseInt(e.translate[1]);
 
             newX = newX > 200 ? 200 : newX < -200 ? -200 : newX;
             newY = newY > 200 ? 200 : newY < -200 ? -200 : newY;
 
+            e.target.setAttribute(
+              "style",
+              `transform: translate(${newX}px, ${newY}px) scale(${scaleX}, ${scaleY}) rotate(${rotate}deg)`
+            );
+          }}
+          onDragEnd={(e) => {
             setX(newX);
             setY(newY);
           }}
@@ -147,28 +162,42 @@ function Draw({
             e.set([scaleX, scaleY]);
           }}
           onScale={(e) => {
-            let newX = parseFloat(e.scale[0].toFixed(2));
-            let newY = parseFloat(e.scale[1].toFixed(2));
+            newScaleX = parseFloat(e.scale[0].toFixed(2));
+            newScaleY = parseFloat(e.scale[1].toFixed(2));
 
-            newX = newX > 1.0 ? 1.0 : newX < 0.01 ? 0.01 : newX;
-            newY = newY > 1.0 ? 1.0 : newY < 0.01 ? 0.01 : newY;
+            newScaleX =
+              newScaleX > 1.0 ? 1.0 : newScaleX < 0.01 ? 0.01 : newScaleX;
+            newScaleY =
+              newScaleY > 1.0 ? 1.0 : newScaleY < 0.01 ? 0.01 : newScaleY;
 
-            setScaleX(newX);
-            setScaleY(newY);
+            e.target.setAttribute(
+              "style",
+              `transform: translate(${x}px, ${y}px) scale(${newScaleX}, ${newScaleY}) rotate(${rotate}deg)`
+            );
+          }}
+          onScaleEnd={(e) => {
+            setScaleX(newScaleX);
+            setScaleY(newScaleY);
           }}
           onRotateStart={(e) => {
             e.set(rotate);
           }}
           onRotate={(e) => {
-            let newRotate = parseInt(e.rotation);
+            newRotate = parseInt(e.rotation);
             newRotate =
               newRotate > 360 ? 360 : newRotate < -360 ? -360 : newRotate;
 
+            e.target.setAttribute(
+              "style",
+              `transform: translate(${x}px, ${y}px) scale(${scaleX}, ${scaleY}) rotate(${newRotate}deg)`
+            );
+          }}
+          onRotateEnd={(e) => {
             setRotate(newRotate);
           }}
           onRender={(e) => {
-            //e.target.style.transform = e.transform;
-            console.log(e.transform);
+            // e.target.style.transform = e.transform;
+            // console.log(e.transform);
           }}
         ></Moveable>
       ) : undefined}

@@ -1,4 +1,6 @@
 import * as MuiIcons from "@mui/icons-material";
+import { styled } from "@mui/system";
+import { unstable_styleFunctionSx } from "@mui/system";
 
 import { ReactComponent as PatternCornerSvg_1 } from "./pattern/pattern_corner_1.svg";
 import { ReactComponent as PatternCornerSvg_2 } from "./pattern/pattern_corner_2.svg";
@@ -34,12 +36,7 @@ const patterns = {
   pattern_tree: PatternTreeSvg,
 };
 
-export const PatternResolver = ({
-  patternName,
-  targetRef,
-  color,
-  ...props
-}) => {
+const _PatternResolver = ({ patternName, color, ...props }) => {
   const PatternComponent = patterns[patternName];
 
   if (!PatternComponent) {
@@ -47,23 +44,14 @@ export const PatternResolver = ({
     return null; // You can return a default icon or an empty element here
   }
 
-  return (
-    <PatternComponent
-      ref={targetRef}
-      style={{
-        fill:
-          color == "primary"
-            ? "rgba(25, 118, 210, 1)"
-            : color == "default"
-            ? "rgba(0, 0, 0, 0.54)"
-            : color,
-      }}
-      {...props}
-    />
-  );
+  return <PatternComponent {...props} />;
 };
 
-export const IconResolver = ({ iconName, targetRef, ...props }) => {
+export const PatternResolver = styled(_PatternResolver)(
+  unstable_styleFunctionSx
+);
+
+export const IconResolver = ({ iconName, ...props }) => {
   const IconComponent = MuiIcons[iconName];
 
   if (!IconComponent) {
@@ -71,5 +59,5 @@ export const IconResolver = ({ iconName, targetRef, ...props }) => {
     return null; // You can return a default icon or an empty element here
   }
 
-  return <IconComponent ref={targetRef} {...props} />;
+  return <IconComponent {...props} />;
 };
