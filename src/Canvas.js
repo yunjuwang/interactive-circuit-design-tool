@@ -113,6 +113,9 @@ function Draw({
         <IconResolver
           iconName={shape}
           className={editing ? "target" : undefined}
+          transform={`translate(${x} ${y}) rotate(${rotate}) scale(${
+            flip ? -scaleX : scaleX
+          } ${scaleY}) `}
           sx={
             type == "base"
               ? baseStyle
@@ -125,6 +128,9 @@ function Draw({
         <PatternResolver
           patternName={shape}
           className={editing ? "target" : undefined}
+          transform={`translate(${x} ${y}) rotate(${rotate}) scale(${
+            flip ? -scaleX : scaleX
+          } ${scaleY}) `}
           sx={patternStyle}
         />
       )}
