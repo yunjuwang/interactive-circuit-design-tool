@@ -29,20 +29,6 @@ const BASE_SHAPE_LIST = [
   "Shield",
 ];
 
-function AddBoxBaseButton({ handleClickAddBoxBase }) {
-  return (
-    <Button
-      variant="outlined"
-      size="small"
-      startIcon={<ViewInArIcon />}
-      onClick={handleClickAddBoxBase}
-      sx={{ position: "relative", top: "-4px", left: "5px", height: "32px" }}
-    >
-      Add Box
-    </Button>
-  );
-}
-
 export function BaseList({ bases, editingId, handleSetEditingId }) {
   return (
     <>
@@ -71,7 +57,6 @@ export function BaseOptions({ handleAddBase }) {
           <IconResolver iconName={shape} />
         </IconButton>
       ))}
-      <AddBoxBaseButton />
     </Stack>
   );
 }
