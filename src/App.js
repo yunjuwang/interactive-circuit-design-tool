@@ -283,7 +283,7 @@ function App() {
                 canvasScale={canvasScale}
                 setCanvasScale={setCanvasScale}
               />
-              <ExportButton />
+              <ExportButton canvasScale={canvasScale} />
             </div>
           </div>
         </Step>
