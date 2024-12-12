@@ -12,7 +12,6 @@ import Link from "@mui/material/Link";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import DrawIcon from "@mui/icons-material/Draw";
 import ContentCutIcon from "@mui/icons-material/ContentCut";
-import SettingsSuggestIcon from "@mui/icons-material/SettingsSuggest";
 import SettingsInputComponentIcon from "@mui/icons-material/SettingsInputComponent";
 
 export function GetWireColor(output) {
@@ -33,14 +32,12 @@ export function GetWireColor(output) {
 export function Step({ step, title, desc, children }) {
   function _GetIcon() {
     return step == 1 ? (
-      <SettingsSuggestIcon />
-    ) : step == 2 ? (
       <AutoFixHighIcon />
-    ) : step == 3 ? (
+    ) : step == 2 ? (
       <ContentCutIcon />
-    ) : step == 4 ? (
+    ) : step == 3 ? (
       <DrawIcon />
-    ) : step == 5 ? (
+    ) : step == 4 ? (
       <SettingsInputComponentIcon />
     ) : undefined;
   }
@@ -85,7 +82,7 @@ export function Step({ step, title, desc, children }) {
         </Typography>
         <Typography color="text.secondary">{desc}</Typography>
         {children}
-        {step != 5 ? <NextStepButton /> : <CompletedButton />}
+        {step != 4 ? <NextStepButton /> : <CompletedButton />}
       </TimelineContent>
     </TimelineItem>
   );

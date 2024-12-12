@@ -155,24 +155,11 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <div className="container"></div>
+
       <Instruction>
-        <Step step={1} title="Design Your System" desc="">
-          <div className="container">
-            <div className="section" id="setting-section">
-              <h3>Decide Your System I/O...</h3>
-              <InputSelect
-                input={input}
-                handleInputChange={handleInputChange}
-              />
-              <OutputSelect
-                output={output}
-                handleOutputChange={handleOutputChange}
-              />
-            </div>
-          </div>
-        </Step>
         <Step
-          step={2}
+          step={1}
           title="Design Your Circuit"
           desc="Design your circuit and export!"
         >
@@ -301,7 +288,7 @@ function App() {
           </div>
         </Step>
         <Step
-          step={3}
+          step={2}
           title="Laser Cut"
           desc={
             <>
@@ -313,14 +300,14 @@ function App() {
           <LaserCutImg />
         </Step>
         <Step
-          step={4}
+          step={3}
           title="3D pen & Conductive Filament"
           desc={"Trace over the engraved parts"}
         >
           <DrawCircuitImg />
         </Step>
         <Step
-          step={5}
+          step={4}
           title="Connect"
           desc={
             <>
