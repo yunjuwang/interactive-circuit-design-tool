@@ -52,6 +52,10 @@ body {
   flex: 1 0 500px;
 }
 
+#template-section > h4 {
+  margin: 5px 0px;
+}
+
 #circuit-select-section > *,
 #circuit-edit-section > *,
 #circuit-result-section > * {

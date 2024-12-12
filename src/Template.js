@@ -4,7 +4,6 @@ import TouchAppIcon from "@mui/icons-material/TouchApp";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import LocalDrinkIcon from "@mui/icons-material/LocalDrink";
 
-const SIMPLE_TOUCH_SENSOR_SCALE = 3;
 const SIMPLE_TOUCH_SENSOR = [
   {
     id: 0,
@@ -41,7 +40,6 @@ const SIMPLE_TOUCH_SENSOR = [
   },
 ];
 
-const LIGHT_BOX_SCALE = 30;
 const LIGHT_BOX = [
   {
     id: 0,
@@ -188,7 +186,6 @@ const LIGHT_BOX = [
   },
 ];
 
-const VASE_SCALE = 20;
 const VASE = [
   {
     id: 0,
@@ -280,44 +277,47 @@ const VASE = [
   },
 ];
 
-export function TemplateButton({
+const TEMPLATES = [
+  {
+    name: "Simple Touch Sensor",
+    items: SIMPLE_TOUCH_SENSOR,
+    scale: 3,
+    icon: <TouchAppIcon />,
+  },
+  {
+    name: "3D Light Box",
+    items: LIGHT_BOX,
+    scale: 30,
+    icon: <ViewInArIcon />,
+  },
+  {
+    name: "Water Level Sense Vase",
+    items: VASE,
+    scale: 20,
+    icon: <LocalDrinkIcon />,
+  },
+];
+
+export function Template({
   setItems,
   setCurrId,
   setEditingId,
   setCanvasScale,
 }) {
-  function _UseTemplate() {
-    setItems(SIMPLE_TOUCH_SENSOR);
-    setCurrId(SIMPLE_TOUCH_SENSOR.length);
+  function _UseTemplate(items, scale) {
+    setItems(items);
+    setCurrId(items.length);
     setEditingId(-1);
-    setCanvasScale(SIMPLE_TOUCH_SENSOR_SCALE);
+    setCanvasScale(scale);
   }
-
-  function _UseTemplate2() {
-    setItems(LIGHT_BOX);
-    setCurrId(LIGHT_BOX.length);
-    setEditingId(-1);
-    setCanvasScale(LIGHT_BOX_SCALE);
-  }
-
-  function _UseTemplate3() {
-    setItems(VASE);
-    setCurrId(VASE.length);
-    setEditingId(-1);
-    setCanvasScale(VASE_SCALE);
-  }
-
-  return (
-    <>
-      <Button startIcon={<TouchAppIcon />} onClick={_UseTemplate}>
-        Simple Touch Sensor
-      </Button>
-      <Button startIcon={<ViewInArIcon />} onClick={_UseTemplate2}>
-        3D Light Box
-      </Button>
-      <Button startIcon={<LocalDrinkIcon />} onClick={_UseTemplate3}>
-        Water Level Sense Vase
-      </Button>
-    </>
-  );
+  return TEMPLATES.map((template) => (
+    <Button
+      key={template.name}
+      startIcon={template.icon}
+      onClick={() => _UseTemplate(template.items, template.scale)}
+      sx={{ marginRight: "10px" }}
+    >
+      {template.name}
+    </Button>
+  ));
 }

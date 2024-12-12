@@ -14,7 +14,7 @@ import { Editor } from "./Editor.js";
 import { ExportButton } from "./Export.js";
 import { Instruction, Step, GetWireColor } from "./Instruction.js";
 import { LaserCutImg, DrawCircuitImg } from "./Image.js";
-import { TemplateButton } from "./Template.js";
+import { Template } from "./Template.js";
 
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 
@@ -176,8 +176,9 @@ function App() {
           title="Design Your Circuit"
           desc="Design your circuit and export!"
         >
-          <div className="section">
-            <TemplateButton
+          <div className="section" id="template-section">
+            <h4>Use Template</h4>
+            <Template
               setItems={setItems}
               setCurrId={setCurrId}
               setEditingId={setEditingId}

@@ -1,13 +1,10 @@
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import { IconResolver } from "./Utils.js";
-import ViewInArIcon from "@mui/icons-material/ViewInAr";
 
 const BASE_SHAPE_LIST = [
   "Circle",
   "Square",
-  // "Rectangle",
   "Pentagon",
   "Hexagon",
   "Star",
@@ -16,17 +13,16 @@ const BASE_SHAPE_LIST = [
   "Navigation",
   "Brightness2",
   "DarkMode",
-  // "ModeComment",
   "ChatBubble",
   "Bookmark",
   "Cloud",
+  "Label",
+  "LocalOffer",
+  "Shield",
   // "DesktopMac",
   // "Work",
   // "Folder",
-  "Label",
-  "LocalOffer",
   // "Science",
-  "Shield",
 ];
 
 export function BaseList({ bases, editingId, handleSetEditingId }) {
