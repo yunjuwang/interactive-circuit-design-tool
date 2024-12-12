@@ -13,8 +13,8 @@ export function InputSlider({
   InputName,
   value,
   setValue,
-  minValue = -200,
-  maxValue = 200,
+  minValue = -250,
+  maxValue = 250,
   step = 1,
   sx,
 }) {
