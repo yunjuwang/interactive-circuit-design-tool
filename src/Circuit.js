@@ -21,6 +21,7 @@ const PATTERN_LIST = [
   "pattern_zigzag2_2",
   "pattern_zigzag2_3",
   "pattern_tree",
+  "pattern_tree_corner",
 ];
 
 function AddMoreCircuitButton({ handleClickAddCircuit }) {

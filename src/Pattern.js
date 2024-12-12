@@ -19,6 +19,7 @@ const PATTERN_LIST = [
   "pattern_zigzag2_2",
   "pattern_zigzag2_3",
   "pattern_tree",
+  "pattern_tree_corner",
 ];
 
 export function PatternOptions({ handleAddPattern }) {
@@ -31,7 +32,11 @@ export function PatternOptions({ handleAddPattern }) {
             width="24px"
             height="24px"
             color="defalut"
-            transform={shape == "pattern_tree" ? "scale(2 2)" : "scale(3 3)"}
+            transform={
+              shape == "pattern_tree" || shape == "pattern_tree_corner"
+                ? "scale(2 2)"
+                : "scale(3 3)"
+            }
           />
         </IconButton>
       ))}

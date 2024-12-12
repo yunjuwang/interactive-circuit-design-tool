@@ -18,6 +18,7 @@ import { ReactComponent as PatternZigzagSvg2_1 } from "./pattern/pattern_zigzag2
 import { ReactComponent as PatternZigzagSvg2_2 } from "./pattern/pattern_zigzag2_2.svg";
 import { ReactComponent as PatternZigzagSvg2_3 } from "./pattern/pattern_zigzag2_3.svg";
 import { ReactComponent as PatternTreeSvg } from "./pattern/pattern_tree.svg";
+import { ReactComponent as PatternTreeCornerSvg } from "./pattern/pattern_tree_corner.svg";
 
 const patterns = {
   pattern_corner_1: PatternCornerSvg_1,
@@ -34,6 +35,7 @@ const patterns = {
   pattern_zigzag2_2: PatternZigzagSvg2_2,
   pattern_zigzag2_3: PatternZigzagSvg2_3,
   pattern_tree: PatternTreeSvg,
+  pattern_tree_corner: PatternTreeCornerSvg,
 };
 
 const _PatternResolver = ({ patternName, color, ...props }) => {
