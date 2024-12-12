@@ -96,9 +96,9 @@ function Draw({
     if (svgComponent) {
       svgComponent.setAttribute(
         "transform",
-        `translate(${x} ${y}) scale(${
+        `translate(${x} ${y}) rotate(${rotate}) scale(${
           flip ? -scaleX : scaleX
-        } ${scaleY}) rotate(${rotate})`
+        } ${scaleY})`
       );
     }
     // update moveable rect
@@ -150,14 +150,14 @@ function Draw({
             newX = parseInt(e.translate[0]);
             newY = parseInt(e.translate[1]);
 
-            newX = newX > 200 ? 200 : newX < -200 ? -200 : newX;
-            newY = newY > 200 ? 200 : newY < -200 ? -200 : newY;
+            newX = newX > 250 ? 250 : newX < -250 ? -250 : newX;
+            newY = newY > 250 ? 250 : newY < -250 ? -250 : newY;
 
             e.target.setAttribute(
               "transform",
-              `translate(${newX} ${newY}) scale(${
+              `translate(${newX} ${newY}) rotate(${rotate}) scale(${
                 flip ? -scaleX : scaleX
-              } ${scaleY}) rotate(${rotate})`
+              } ${scaleY})`
             );
           }}
           onDragEnd={(e) => {
@@ -171,8 +171,8 @@ function Draw({
             newX = parseInt(x + e.drag.translate[0]);
             newY = parseInt(y + e.drag.translate[1]);
 
-            newX = newX > 200 ? 200 : newX < -200 ? -200 : newX;
-            newY = newY > 200 ? 200 : newY < -200 ? -200 : newY;
+            newX = newX > 250 ? 250 : newX < -250 ? -250 : newX;
+            newY = newY > 250 ? 250 : newY < -250 ? -250 : newY;
 
             newScaleX = parseFloat(e.scale[0].toFixed(2));
             newScaleY = parseFloat(e.scale[1].toFixed(2));
@@ -184,9 +184,9 @@ function Draw({
 
             e.target.setAttribute(
               "transform",
-              `translate(${newX} ${newY}) scale(${
+              `translate(${newX} ${newY}) rotate(${rotate}) scale(${
                 flip ? -newScaleX : newScaleX
-              } ${newScaleY}) rotate(${rotate})`
+              } ${newScaleY})`
             );
           }}
           onScaleEnd={(e) => {
@@ -205,9 +205,9 @@ function Draw({
 
             e.target.setAttribute(
               "transform",
-              `translate(${x} ${y}) scale(${
+              `translate(${x} ${y}) rotate(${newRotate}) scale(${
                 flip ? -scaleX : scaleX
-              } ${scaleY}) rotate(${newRotate})`
+              } ${scaleY})`
             );
           }}
           onRotateEnd={(e) => {
