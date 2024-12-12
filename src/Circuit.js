@@ -48,7 +48,11 @@ export function PatternOptions({ handleAddPattern, handleClickAddCircuit }) {
             width="24px"
             height="24px"
             color="default"
-            transform={shape == "pattern_tree" ? "scale(2 2)" : "scale(3 3)"}
+            transform={
+              shape == "pattern_tree" || shape == "pattern_tree_corner"
+                ? "scale(2 2)"
+                : "scale(3 3)"
+            }
           />
         </IconButton>
       ))}
@@ -77,7 +81,10 @@ export function CircuitList({ items, editingId, handleSetEditingId }) {
                 height="24px"
                 color={editingId == item.id ? "primary" : "default"}
                 transform={
-                  item.shape == "pattern_tree" ? "scale(2 2)" : "scale(3 3)"
+                  item.shape == "pattern_tree" ||
+                  item.shape == "pattern_tree_corner"
+                    ? "scale(2 2)"
+                    : "scale(3 3)"
                 }
               />
             ) : undefined}
