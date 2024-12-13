@@ -61,7 +61,7 @@ export function Step({ step, title, desc, children }) {
           <h4>
             Thank you for participating in the workshop! :3 &#128151; <br />
             Please help to fill out the{" "}
-            <Link href="https://forms.gle/Wtu8Z8riBnyMFSvD7" target="_blank">
+            <Link href="https://forms.gle/hR4sVeh5ioqusYE9A" target="_blank">
               questionnaire
             </Link>{" "}
             !

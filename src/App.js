@@ -5,6 +5,7 @@ import Divider from "@mui/material/Divider";
 import Header from "./Header";
 import { Canvas, CanvasScaleSlider } from "./Canvas";
 import Button from "@mui/material/Button";
+import Link from "@mui/material/Link";
 
 import SearchIconsDialog from "./Dialog.js";
 import { InputSelect, OutputSelect } from "./SystemIO.js";
@@ -13,7 +14,7 @@ import { CircuitList, PatternOptions } from "./Circuit.js";
 import { Editor } from "./Editor.js";
 import { ExportButton } from "./Export.js";
 import { Instruction, Step, GetWireColor } from "./Instruction.js";
-import { LaserCutImg, DrawCircuitImg } from "./Image.js";
+import { IntroImg, LaserCutImg, DrawCircuitImg } from "./Image.js";
 import { Template } from "./Template.js";
 
 import AddCircleIcon from "@mui/icons-material/AddCircle";
@@ -155,7 +156,17 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <div className="container"></div>
+      <h3 className="intro">
+        <Typography color="text.secondary">
+          Hi!&#128515; This toolkit enables you to create your own{" "}
+          <b>interactive circuits</b> using a 3D pen.
+          <br />
+          We currently offer two types of inputs: <b>touch sensing</b> and{" "}
+          <b>water sensing</b>, allowing for the creation of various
+          applications.
+        </Typography>
+        <IntroImg />
+      </h3>
 
       <Instruction>
         <Step
@@ -298,23 +309,23 @@ function App() {
           }
         >
           <LaserCutImg />
+          You could fill out the first 5 questions of the{" "}
+          <Link href="https://forms.gle/hR4sVeh5ioqusYE9A" target="_blank">
+            questionnaire
+          </Link>{" "}
+          while waiting...!
         </Step>
         <Step
           step={3}
           title="3D pen & Conductive Filament"
-          desc={"Trace over the engraved parts"}
+          desc={"Trace over the engraved parts and connect the wires"}
         >
           <DrawCircuitImg />
         </Step>
         <Step
           step={4}
           title="Connect"
-          desc={
-            <>
-              Connect the {GetWireColor(output)} wire from the output module and
-              complete!
-            </>
-          }
+          desc={<>Connect to output module and complete!</>}
         ></Step>
       </Instruction>
     </div>

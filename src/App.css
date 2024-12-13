@@ -6,6 +6,10 @@ body {
   margin: 0;
 }
 
+.intro {
+  padding: 30px;
+}
+
 .container {
   display: flex;
   justify-content: left;
