@@ -38,6 +38,8 @@ function GenerateSvgFromCanvas(canvas, canvasScale) {
   // create a new svg container
   const newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   newSvg.setAttribute("viewBox", `0 0 ${canvasScale} ${canvasScale}`);
+  newSvg.setAttribute("height", `${canvasScale}px`);
+  newSvg.setAttribute("width", `${canvasScale}px`);
 
   // deal with all svgs, collect all elements inside
   const svgNodes = canvas.childNodes;
