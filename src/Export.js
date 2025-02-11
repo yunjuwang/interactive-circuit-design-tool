@@ -37,9 +37,12 @@ function ExportSvg(svg) {
 function GenerateSvgFromCanvas(canvas, canvasScale) {
   // create a new svg container
   const newSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  newSvg.setAttribute("viewBox", `0 0 ${canvasScale} ${canvasScale}`);
-  newSvg.setAttribute("height", `${canvasScale}px`);
-  newSvg.setAttribute("width", `${canvasScale}px`);
+  newSvg.setAttribute("viewBox", "0 0 24 24");
+  newSvg.setAttribute("height", "500px");
+  newSvg.setAttribute("width", "500px");
+  // newSvg.setAttribute("viewBox", `0 0 ${canvasScale} ${canvasScale}`);
+  // newSvg.setAttribute("height", `${canvasScale}px`);
+  // newSvg.setAttribute("width", `${canvasScale}px`);
 
   // deal with all svgs, collect all elements inside
   const svgNodes = canvas.childNodes;
@@ -60,8 +63,9 @@ function GenerateSvgFromCanvas(canvas, canvasScale) {
     const centerX = 12;
     const centerY = 12;
 
-    svgTransform = svgTransform
-      .replace(/translate\(([-\d.]+) ([-\d.]+)\)/, (match, x, y) => {
+    svgTransform = svgTransform.replace(
+      /translate\(([-\d.]+) ([-\d.]+)\)/,
+      (match, x, y) => {
         // rescale transform
         x = (parseFloat(x) / 500) * 24;
         y = (parseFloat(y) / 500) * 24;
@@ -99,14 +103,15 @@ function GenerateSvgFromCanvas(canvas, canvasScale) {
         y = y + deltaY;
 
         return `translate(${x} ${y})`;
-      })
-      // scale SVG according to canvasScale
-      .replace(/scale\(([-\d.]+) ([-\d.]+)\)/, (match, x, y) => {
-        x = (x * canvasScale) / 24;
-        y = (y * canvasScale) / 24;
+      }
+    );
+    // // scale SVG according to canvasScale
+    // .replace(/scale\(([-\d.]+) ([-\d.]+)\)/, (match, x, y) => {
+    //   x = (x * canvasScale) / 24;
+    //   y = (y * canvasScale) / 24;
 
-        return `scale(${x} ${y})`;
-      });
+    //   return `scale(${x} ${y})`;
+    // });
     const elementNodes = svgNode.childNodes;
 
     // deal with all elements(path) in svg
@@ -125,8 +130,8 @@ function GenerateSvgFromCanvas(canvas, canvasScale) {
           );
           if (propertyValue == "rgba(25, 118, 210, 0.3)") {
             propertyValue = "rgba(0, 0, 0, 0.2)";
-          } else if (propertyValue == "rgba(25, 118, 210, 1)") {
-            propertyValue = "rgba(0, 0, 0, 0.2)";
+          } else if (propertyValue == "rgb(25, 118, 210)") {
+            propertyValue = "#ff0000";
           }
           styleString += `${RelevantStyles[tagName][st]}:${propertyValue}; `;
         }
