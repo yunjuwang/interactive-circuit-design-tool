@@ -14,7 +14,7 @@ export default function Header() {
             sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
           />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Interactive Circuits Toolkit
+            Interactive Circuit Design Tool
           </Typography>
         </Toolbar>
       </AppBar>

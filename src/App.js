@@ -158,7 +158,7 @@ function App() {
       <Header />
       <h3 className="intro">
         <Typography color="text.secondary">
-          Hi!&#128515; This toolkit enables you to create your own{" "}
+          Hi!&#128515; This design tool enables you to create your own{" "}
           <b>interactive circuits</b> using a 3D pen.
           <br />
           We currently offer two types of inputs: <b>touch sensing</b> and{" "}
