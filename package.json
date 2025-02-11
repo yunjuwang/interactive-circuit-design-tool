@@ -2,7 +2,7 @@
   "name": "interactive-circuit-design-tool",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yunjuwang.github.io/interactive-circuits-toolkit",
+  "homepage": "https://yunjuwang.github.io/interactive-circuit-design-tool",
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
