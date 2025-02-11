@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/interactive-circuit-design-tool/static/css/main.83c7cd59.css",
-    "main.js": "/interactive-circuit-design-tool/static/js/main.66c0319b.js",
+    "main.js": "/interactive-circuit-design-tool/static/js/main.7db6eff0.js",
     "static/media/prototype_1.png": "/interactive-circuit-design-tool/static/media/prototype_1.e67ca93bc540688a91c2.png",
     "static/media/prototype_2.png": "/interactive-circuit-design-tool/static/media/prototype_2.bd79fb256efaff477b50.png",
     "static/media/laser_cut_2.jpg": "/interactive-circuit-design-tool/static/media/laser_cut_2.484a2aabcf7e07c06052.jpg",
@@ -27,10 +27,10 @@
     "static/media/pattern_line_1.svg": "/interactive-circuit-design-tool/static/media/pattern_line_1.4d0e96ab3c5ee860d16a9d5b801b574b.svg",
     "static/media/pattern_line_2.svg": "/interactive-circuit-design-tool/static/media/pattern_line_2.96c4d9476fb9cdadd1676198679c632b.svg",
     "main.83c7cd59.css.map": "/interactive-circuit-design-tool/static/css/main.83c7cd59.css.map",
-    "main.66c0319b.js.map": "/interactive-circuit-design-tool/static/js/main.66c0319b.js.map"
+    "main.7db6eff0.js.map": "/interactive-circuit-design-tool/static/js/main.7db6eff0.js.map"
   },
   "entrypoints": [
     "static/css/main.83c7cd59.css",
-    "static/js/main.66c0319b.js"
+    "static/js/main.7db6eff0.js"
   ]
 }
